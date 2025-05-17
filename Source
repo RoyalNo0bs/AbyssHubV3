@@ -51,6 +51,7 @@ function OrionLib:MakeWindow(WindowValues)
 	OrionGui.DisplayOrder = 999
 	OrionGui.Enabled = true
 	OrionGui.ResetOnSpawn = false
+	OrionGui.IgnoreGuiInset = true
 
 	Orion.Name = "Orion"
 	Orion.Parent = OrionGui
@@ -82,6 +83,8 @@ function OrionLib:MakeWindow(WindowValues)
 	LibraryTitle.TextSize = 20.000
 	LibraryTitle.TextXAlignment = Enum.TextXAlignment.Left
 	LibraryTitle.AutomaticSize = Enum.AutomaticSize.X
+	LibraryTitle.Active = false
+	LibraryTitle.Interactable = false
 
 	TopBar_Options.Parent = TopBar
 	TopBar_Options.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
@@ -307,23 +310,28 @@ function OrionLib:MakeWindow(WindowValues)
 
 	local dragging = false
 	local offset = Vector2.new(0, 0)
+
 	TopBar.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			offset = Orion.Position - UDim2.new(0, input.Position.X, 0, input.Position.Y)
 		end
 	end)
-	Orion.InputEnded:Connect(function(input)
+	UIS.InputEnded:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 		end
 	end)
-	game:GetService("UserInputService").InputChanged:Connect(function(input)
-		if dragging and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			Orion.Position = UDim2.new(0, input.Position.X, 0, input.Position.Y) + offset
+	UIS.InputChanged:Connect(function(input,GP)
+		if dragging == true then
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				Orion.Position = UDim2.new(0, input.Position.X, 0, input.Position.Y) + offset
+			end
 		end
 	end)
-
+	plr.CharacterAdded:Connect(function()
+		Orion.Position = UDim2.new(0.5,0,0.5,0)
+	end)
 	table.insert(OrionLib,Orion)
 
 	function WindowFunctions:MakeTab(Values)
@@ -1059,44 +1067,46 @@ function OrionLib:MakeWindow(WindowValues)
 			local SliderDragging = false
 
 			SliderFrame.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					SliderDragging = true
 				end
 			end)
 
 			UIS.InputEnded:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					SliderDragging = false
 				end
 			end)
 
 			UIS.InputChanged:Connect(function(input)
-				if SliderDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-					local mousePos = input.Position.X
-					local sliderBarPos = SliderFrame.AbsolutePosition.X
-					local sliderWidth = SliderFrame.AbsoluteSize.X
+				if SliderDragging then
+					if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+						local mousePos = input.Position.X
+						local sliderBarPos = SliderFrame.AbsolutePosition.X
+						local sliderWidth = SliderFrame.AbsoluteSize.X
 
-					local newWidth = math.clamp(mousePos - sliderBarPos, 0, sliderWidth)
+						local newWidth = math.clamp(mousePos - sliderBarPos, 0, sliderWidth)
 
-					newWidth = math.floor(newWidth / SliderInfo.Increment) * SliderInfo.Increment
+						newWidth = math.floor(newWidth / SliderInfo.Increment) * SliderInfo.Increment
 
-					local value = math.floor((newWidth / sliderWidth) * (SliderInfo.Max - SliderInfo.Min) + SliderInfo.Min)
-					local Info = TweenInfo.new(
-						0.1,
-						Enum.EasingStyle.Linear,
-						Enum.EasingDirection.Out,
-						0,
-						false,
-						0
-					)
-					--newWidth = ((1/SliderInfo.Max)*value)
-					TweenService:Create(SliderMeter,Info,{Size = UDim2.new(0,newWidth, SliderMeter.Size.Y.Scale, SliderMeter.Size.Y.Offset)}):Play()
-					SliderInfo.Callback(value)
-					if SliderInfo["ValueName"] then
-						value = value.." "..SliderInfo["ValueName"]
+						local value = math.floor((newWidth / sliderWidth) * (SliderInfo.Max - SliderInfo.Min) + SliderInfo.Min)
+						local Info = TweenInfo.new(
+							0.1,
+							Enum.EasingStyle.Linear,
+							Enum.EasingDirection.Out,
+							0,
+							false,
+							0
+						)
+						--newWidth = ((1/SliderInfo.Max)*value)
+						TweenService:Create(SliderMeter,Info,{Size = UDim2.new(0,newWidth, SliderMeter.Size.Y.Scale, SliderMeter.Size.Y.Offset)}):Play()
+						SliderInfo.Callback(value)
+						if SliderInfo["ValueName"] then
+							value = value.." "..SliderInfo["ValueName"]
+						end
+						Slider_Value.Text = value
+						Slider_Value_2.Text = value
 					end
-					Slider_Value.Text = value
-					Slider_Value_2.Text = value
 				end
 			end)
 
