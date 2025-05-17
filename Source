@@ -308,13 +308,13 @@ function OrionLib:MakeWindow(WindowValues)
 	local dragging = false
 	local offset = Vector2.new(0, 0)
 	TopBar.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			offset = Orion.Position - UDim2.new(0, input.Position.X, 0, input.Position.Y)
 		end
 	end)
 	Orion.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 		end
 	end)
