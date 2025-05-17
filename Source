@@ -69,6 +69,8 @@ function OrionLib:MakeWindow(WindowValues)
 	TopBar.Parent = Orion
 	TopBar.BackgroundTransparency = 1.000
 	TopBar.Size = UDim2.new(1, 0, 0, 50)
+	TopBar.Active = true
+	TopBar.Interactable = true
 
 	LibraryTitle.Name = "LibraryTitle"
 	LibraryTitle.Parent = TopBar
@@ -2729,5 +2731,4 @@ end)
 
 
 OrionLib:Init()
-
 
