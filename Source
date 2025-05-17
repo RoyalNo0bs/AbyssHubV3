@@ -1,0 +1,2732 @@
+--ORION--
+local OrionLib = {}
+function OrionLib:MakeWindow(WindowValues)
+	local TweenService = game:GetService("TweenService")
+	local UIS = game:GetService("UserInputService")
+	local Window_Name = WindowValues.Name
+	local Window_HidePremium = WindowValues.HidePremium
+	local Window_SaveConfig = WindowValues.SaveConfig
+	local Window_ConfigFolder = WindowValues.ConfigFolder
+	local plr = game.Players.LocalPlayer
+	local WindowFunctions = {}
+	if plr.PlayerGui:FindFirstChild("Orion") then
+		plr.PlayerGui:FindFirstChild("Orion"):Destroy()
+	end
+	local OrionGui = Instance.new("ScreenGui")
+	local Orion = Instance.new("Frame")
+	local Orion_UICorner = Instance.new("UICorner")
+	local TopBar = Instance.new("Frame")
+	local LibraryTitle = Instance.new("TextLabel")
+	local TopBar_Options = Instance.new("Frame")
+	local TopBar_UICorner = Instance.new("UICorner")
+	local Options_Line = Instance.new("Frame")
+	local Options_UIStroke = Instance.new("UIStroke")
+	local CloseButton = Instance.new("TextButton")
+	local CloseButton_Icon = Instance.new("ImageLabel")
+	local MinimizeButton = Instance.new("TextButton")
+	local MinimizeButton_Icon = Instance.new("ImageLabel")
+	local TopBar_Line = Instance.new("Frame")
+	local TabBar = Instance.new("Frame")
+	local Tabs = Instance.new("ScrollingFrame")
+	local Tabs_UIListLayout = Instance.new("UIListLayout")
+	local Tabs_UIPadding = Instance.new("UIPadding")
+	local ProfileFrame = Instance.new("Frame")
+	local ProfileFrame_Boarder = Instance.new("Frame")
+	local Profile = Instance.new("Frame")
+	local ProfileFrame_UICorner = Instance.new("UICorner")
+	local Profile_Username = Instance.new("TextLabel")
+	local Profile_DisplayName = Instance.new("TextLabel")
+	local Profile_Icon = Instance.new("Frame")
+	local Profile_UICorner = Instance.new("UICorner")
+	local Profile_BackDrop = Instance.new("ImageLabel")
+	local ProfileIcon = Instance.new("ImageLabel")
+	local UICorner_5 = Instance.new("UICorner")
+	local TabBar_SideBoarder = Instance.new("Frame")
+	local TabBar_Line = Instance.new("Frame")
+	local TabBar_Boarder = Instance.new("Frame")
+	local TopBarHitbox = Instance.new("Frame")
+
+	OrionGui.Name = "Orion"
+	OrionGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	OrionGui.DisplayOrder = 999
+	OrionGui.Enabled = true
+	OrionGui.ResetOnSpawn = false
+
+	Orion.Name = "Orion"
+	Orion.Parent = OrionGui
+	Orion.AnchorPoint = Vector2.new(0.5, 0.5)
+	Orion.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	Orion.BorderSizePixel = 0
+	Orion.ClipsDescendants = true
+	Orion.Position = UDim2.new(0.374876857, 0, 0.595667899, 0)
+	Orion.Size = UDim2.new(0, 615, 0, 344)
+	Orion.AnchorPoint = Vector2.new(0.5,0)
+
+	Orion_UICorner.CornerRadius = UDim.new(0, 10)
+	Orion_UICorner.Parent = Orion
+
+	TopBar.Name = "TopBar"
+	TopBar.Parent = Orion
+	TopBar.BackgroundTransparency = 1.000
+	TopBar.Size = UDim2.new(1, 0, 0, 50)
+
+	LibraryTitle.Name = "LibraryTitle"
+	LibraryTitle.Parent = TopBar
+	LibraryTitle.BackgroundTransparency = 1.000
+	LibraryTitle.Position = UDim2.new(0, 25, 0, -24)
+	LibraryTitle.Size = UDim2.new(0, 0, 2, 0)
+	LibraryTitle.Font = Enum.Font.MontserratBlack
+	LibraryTitle.TextColor3 = Color3.fromRGB(240, 240, 240)
+	LibraryTitle.TextSize = 20.000
+	LibraryTitle.TextXAlignment = Enum.TextXAlignment.Left
+	LibraryTitle.AutomaticSize = Enum.AutomaticSize.X
+
+	TopBar_Options.Parent = TopBar
+	TopBar_Options.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	TopBar_Options.BorderSizePixel = 0
+	TopBar_Options.Position = UDim2.new(1, -90, 0, 10)
+	TopBar_Options.Size = UDim2.new(0, 70, 0, 30)
+
+	TopBar_UICorner.CornerRadius = UDim.new(0, 7)
+	TopBar_UICorner.Parent = TopBar_Options
+
+	Options_Line.Parent = TopBar_Options
+	Options_Line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	Options_Line.BorderSizePixel = 0
+	Options_Line.Position = UDim2.new(0.5, 0, 0, 0)
+	Options_Line.Size = UDim2.new(0, 1, 1, 0)
+
+	Options_UIStroke.Parent = TopBar_Options
+	Options_UIStroke.Thickness = 1
+	Options_UIStroke.Color = Color3.fromRGB(60, 60, 60)
+
+	CloseButton.Parent = TopBar_Options
+	CloseButton.BackgroundTransparency = 1.000
+	CloseButton.BorderSizePixel = 0
+	CloseButton.Position = UDim2.new(0.5, 0, 0, 0)
+	CloseButton.Size = UDim2.new(0.5, 0, 1, 0)
+	CloseButton.AutoButtonColor = false
+	CloseButton.Text = ""
+	CloseButton.TextColor3 = Color3.fromRGB(27, 42, 53)
+
+	CloseButton_Icon.Name = "Icon"
+	CloseButton_Icon.Parent = CloseButton
+	CloseButton_Icon.BackgroundTransparency = 1.000
+	CloseButton_Icon.Position = UDim2.new(0, 9, 0, 6)
+	CloseButton_Icon.Size = UDim2.new(0, 18, 0, 18)
+	CloseButton_Icon.Image = "rbxassetid://7072725342"
+	CloseButton_Icon.ImageColor3 = Color3.fromRGB(240, 240, 240)
+
+	MinimizeButton.Parent = TopBar_Options
+	MinimizeButton.BackgroundTransparency = 1.000
+	MinimizeButton.BorderSizePixel = 0
+	MinimizeButton.Size = UDim2.new(0.5, 0, 1, 0)
+	MinimizeButton.AutoButtonColor = false
+	MinimizeButton.Text = ""
+
+	MinimizeButton_Icon.Name = "Icon"
+	MinimizeButton_Icon.Parent = MinimizeButton
+	MinimizeButton_Icon.BackgroundTransparency = 1.000
+	MinimizeButton_Icon.Position = UDim2.new(0, 9, 0, 6)
+	MinimizeButton_Icon.Size = UDim2.new(0, 18, 0, 18)
+	MinimizeButton_Icon.Image = "rbxassetid://7072719338"
+	MinimizeButton_Icon.ImageColor3 = Color3.fromRGB(240, 240, 240)
+
+	TopBar_Line.Parent = TopBar
+	TopBar_Line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	TopBar_Line.BorderSizePixel = 0
+	TopBar_Line.Position = UDim2.new(0, 0, 1, -1)
+	TopBar_Line.Size = UDim2.new(1, 0, 0, 1)
+
+	TabBar.Name = "TabBar"
+	TabBar.Parent = Orion
+	TabBar.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	TabBar.BorderSizePixel = 0
+	TabBar.Position = UDim2.new(0, 0, 0, 50)
+	TabBar.Size = UDim2.new(0, 150, 1, -50)
+
+	Tabs.Name = "Tabs"
+	Tabs.Parent = TabBar
+	Tabs.BackgroundTransparency = 1
+	Tabs.BorderSizePixel = 0
+	Tabs.Size = UDim2.new(1, 0, 1, -50)
+	Tabs.BottomImage = "rbxassetid://7445543667"
+	Tabs.MidImage = "rbxassetid://7445543667"
+	Tabs.ScrollBarThickness = 4
+	Tabs.TopImage = "rbxassetid://7445543667"
+	Tabs.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 60)
+	Tabs.ScrollBarImageTransparency = 0
+
+	Tabs_UIListLayout.Parent = Tabs
+	Tabs_UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+	Tabs_UIPadding.Parent = Tabs
+	Tabs_UIPadding.PaddingBottom = UDim.new(0, 8)
+	Tabs_UIPadding.PaddingTop = UDim.new(0, 8)
+
+	ProfileFrame.Name = "Profile"
+	ProfileFrame.Parent = TabBar
+	ProfileFrame.BackgroundTransparency = 1.000
+	ProfileFrame.Position = UDim2.new(0, 0, 1, -50)
+	ProfileFrame.Size = UDim2.new(1, 0, 0, 50)
+
+	ProfileFrame_Boarder.Parent = ProfileFrame
+	ProfileFrame_Boarder.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	ProfileFrame_Boarder.BorderSizePixel = 0
+	ProfileFrame_Boarder.Size = UDim2.new(1, 0, 0, 1)
+
+	Profile.Parent = ProfileFrame
+	Profile.AnchorPoint = Vector2.new(0, 0.5)
+	Profile.BackgroundTransparency = 1.000
+	Profile.Position = UDim2.new(0, 10, 0.5, 0)
+	Profile.Size = UDim2.new(0, 32, 0, 32)
+
+	ProfileFrame_UICorner.CornerRadius = UDim.new(1, 10)
+	ProfileFrame_UICorner.Parent = Profile
+
+	Profile_DisplayName.Name = "DisplayName"
+	Profile_DisplayName.Parent = ProfileFrame
+	Profile_DisplayName.BackgroundTransparency = 1.000
+	Profile_DisplayName.ClipsDescendants = true
+	Profile_DisplayName.Position = UDim2.new(0, 50, 0, 12)
+	Profile_DisplayName.Size = UDim2.new(1, -60, 0, 13)
+	Profile_DisplayName.Font = Enum.Font.GothamBold
+	Profile_DisplayName.Text = "Icetea_Trash"
+	Profile_DisplayName.TextColor3 = Color3.fromRGB(240, 240, 240)
+	Profile_DisplayName.TextSize = 13.000
+	Profile_DisplayName.TextXAlignment = Enum.TextXAlignment.Left
+
+	Profile_Username.Name = "Username"
+	Profile_Username.Parent = ProfileFrame
+	Profile_Username.BackgroundTransparency = 1.000
+	Profile_Username.Position = UDim2.new(0, 50, 1, -25)
+	Profile_Username.Size = UDim2.new(1, -60, 0, 12)
+	Profile_Username.Font = Enum.Font.Roboto
+	Profile_Username.Text = plr.Name
+	Profile_Username.TextColor3 = Color3.fromRGB(150, 150, 150)
+	Profile_Username.TextSize = 12.000
+	Profile_Username.TextXAlignment = Enum.TextXAlignment.Left
+
+	ProfileIcon.Parent = Profile
+	ProfileIcon.BackgroundTransparency = 1.000
+	ProfileIcon.Size = UDim2.new(1, 0, 1, 0)
+	ProfileIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=4955233520&width=420&height=420&format=png"
+
+	ProfileIcon.Name = "ProfileIcon"
+	ProfileIcon.Parent = Profile
+	ProfileIcon.BackgroundTransparency = 1.000
+	ProfileIcon.Size = UDim2.new(1, 0, 1, 0)
+	ProfileIcon.Image = "rbxassetid://4031889928"
+	ProfileIcon.ImageColor3 = Color3.fromRGB(32, 32, 32)
+
+	Profile_BackDrop.Name = "Icon"
+	Profile_BackDrop.Parent = ProfileFrame
+	Profile_BackDrop.AnchorPoint = Vector2.new(0, 0.5)
+	Profile_BackDrop.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	Profile_BackDrop.BorderSizePixel = 0
+	Profile_BackDrop.Position = UDim2.new(0, 10, 0.5, 0)
+	Profile_BackDrop.Size = UDim2.new(0, 32, 0, 32)
+
+	Profile_UICorner.CornerRadius = UDim.new(1, 10)
+	Profile_UICorner.Parent = Profile_BackDrop
+
+
+	UICorner_5.CornerRadius = UDim.new(0, 10)
+	UICorner_5.Parent = TabBar
+
+	TabBar_SideBoarder.Parent = TabBar
+	TabBar_SideBoarder.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	TabBar_SideBoarder.BorderSizePixel = 0
+	TabBar_SideBoarder.Position = UDim2.new(1, -10, 0, 0)
+	TabBar_SideBoarder.Size = UDim2.new(0, 10, 1, 0)
+	TabBar_SideBoarder.ZIndex = 0
+
+	TabBar_Line.Parent = TabBar
+	TabBar_Line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	TabBar_Line.BorderSizePixel = 0
+	TabBar_Line.Position = UDim2.new(1, -1, 0, 0)
+	TabBar_Line.Size = UDim2.new(0, 1, 1, 0)
+
+	TabBar_Boarder.Parent = TabBar
+	TabBar_Boarder.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	TabBar_Boarder.BorderSizePixel = 0
+	TabBar_Boarder.Size = UDim2.new(1, 0, 0, 10)
+
+	TopBarHitbox.Name = "TopBarHitbox"
+	TopBarHitbox.Parent = Orion
+	TopBarHitbox.BackgroundTransparency = 1.000
+	TopBarHitbox.Size = UDim2.new(1, 0, 0, 50)
+
+	Profile_Username.Text = plr.Name
+	Profile_DisplayName.Text = plr.DisplayName
+	LibraryTitle.Text = Window_Name
+
+	MinimizeButton.MouseButton1Click:Connect(function()
+		if Orion.Size == UDim2.new(0,615,0,344) then
+			local tweenInfo = TweenInfo.new(
+				0.1,
+				Enum.EasingStyle.Quad,
+				Enum.EasingDirection.Out,
+				0,
+				false,
+				0
+			)
+			TweenService:Create(Orion,tweenInfo,{Size = UDim2.new(0,LibraryTitle.AbsoluteSize.X+150,0,50)}):Play()
+			ProfileFrame.Visible = false
+			wait(0.1)
+			for _, m in ipairs(Orion:GetChildren()) do
+				if m:IsA("Frame") and m:IsA("ScrollingFrame") then
+					m.Visible = false
+				end
+			end
+			TopBar_Line.Visible = false
+			TopBar.Visible = true
+		else
+			local tweenInfo = TweenInfo.new(
+				0.1,
+				Enum.EasingStyle.Linear,
+				Enum.EasingDirection.Out,
+				0,
+				false,
+				0
+			)
+			TweenService:Create(Orion,tweenInfo,{Size = UDim2.new(0,615,0,344)}):Play()
+			TopBar_Line.Visible = true
+			wait(0.1)
+			for _, m in ipairs(Orion:GetChildren()) do
+				if m:IsA("Frame") and m:IsA("ScrollingFrame") then
+					m.Visible = true
+				end
+			end
+			TopBar.Visible = true
+			ProfileFrame.Visible = true
+		end
+	end)
+
+	local dragging = false
+	local offset = Vector2.new(0, 0)
+	TopBar.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			offset = Orion.Position - UDim2.new(0, input.Position.X, 0, input.Position.Y)
+		end
+	end)
+	Orion.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = false
+		end
+	end)
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+			Orion.Position = UDim2.new(0, input.Position.X, 0, input.Position.Y) + offset
+		end
+	end)
+
+	table.insert(OrionLib,Orion)
+
+	function WindowFunctions:MakeTab(Values)
+		local Icon = Values.Icon
+		local Name = Values.Name
+		local PremiumOnly
+		local TabFunctions = {}
+
+		local TabButton = Instance.new("TextButton")
+		local TabButton_Icon = Instance.new("ImageLabel")
+		local TabButton_Title = Instance.new("TextLabel")
+		local ItemContainer = Instance.new("ScrollingFrame")
+		local ItemContainer_UIListLayout = Instance.new("UIListLayout")
+		local ItemContainer_UIPadding = Instance.new("UIPadding")
+
+		TabButton.Parent = Tabs
+		TabButton.BackgroundTransparency = 1
+		TabButton.Size = UDim2.new(1,0,0,30)
+		TabButton.TextTransparency = 1
+		TabButton.Name = Name
+
+		TabButton_Title.Parent = TabButton
+		TabButton_Title.BackgroundTransparency = 1
+		TabButton_Title.Font = Enum.Font.MontserratMedium
+		TabButton_Title.Text = Name
+		TabButton_Title.Position = UDim2.new(0,35,0,0)
+		TabButton_Title.Size = UDim2.new(1,-35,1,0)
+		TabButton_Title.TextSize = 14
+		TabButton_Title.TextColor3 = Color3.fromRGB(240, 240, 240)
+		TabButton_Title.TextXAlignment = Enum.TextXAlignment.Left
+		TabButton_Title.TextTransparency = 0.4
+
+		ItemContainer.Name = Name
+		ItemContainer.Parent = Orion
+		ItemContainer.BackgroundTransparency = 1.000
+		ItemContainer.BorderSizePixel = 0
+		ItemContainer.Position = UDim2.new(0, 150, 0, 50)
+		ItemContainer.Size = UDim2.new(1, -150, 1, -50)
+		ItemContainer.Visible = false
+		ItemContainer.BottomImage = "rbxassetid://7445543667"
+		ItemContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
+		ItemContainer.MidImage = "rbxassetid://7445543667"
+		ItemContainer.ScrollBarThickness = 5
+		ItemContainer.TopImage = "rbxassetid://7445543667"
+		ItemContainer.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 60)
+		ItemContainer.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+		ItemContainer_UIListLayout.Parent = ItemContainer
+		ItemContainer_UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		ItemContainer_UIListLayout.Padding = UDim.new(0, 6)
+
+		ItemContainer_UIPadding.Parent = ItemContainer
+		ItemContainer_UIPadding.PaddingBottom = UDim.new(0, 15)
+		ItemContainer_UIPadding.PaddingLeft = UDim.new(0, 10)
+		ItemContainer_UIPadding.PaddingRight = UDim.new(0, 10)
+		ItemContainer_UIPadding.PaddingTop = UDim.new(0, 15)
+
+		TabButton_Icon.Parent = TabButton
+		TabButton_Icon.Image = Icon
+		TabButton_Icon.Size = UDim2.new(0,18,0,18)
+		TabButton_Icon.Position = UDim2.new(0,10,0.5,0)
+		TabButton_Icon.AnchorPoint = Vector2.new(0,0.5)
+		TabButton_Icon.BackgroundTransparency = 1 
+		TabButton_Icon.ImageTransparency = 0.4
+		TabButton_Icon.Name = "Icon"
+
+		TabButton.MouseButton1Click:Connect(function()
+			for _, Tab in ipairs(Orion:GetChildren()) do
+				if Tab:IsA("ScrollingFrame") then
+					Tab.Visible = false
+				end
+			end
+			for _, Tab in ipairs(Tabs:GetChildren()) do
+				if Tab:IsA("TextButton") then
+					Tab.TextLabel.TextTransparency = 0.4
+					Tab.TextLabel.Font = Enum.Font.MontserratMedium
+					Tab.Icon.ImageTransparency = 0.4
+				end
+			end
+
+			ItemContainer.Visible = true
+			TabButton_Title.Font = Enum.Font.MontserratBlack
+			TabButton_Title.TextTransparency = 0
+			TabButton_Icon.ImageTransparency = 0
+		end)
+
+		function TabFunctions:AddToggle(ToggleValues)
+			local ToggleFunctions = {}
+			local Toggle = Instance.new("Frame")
+			local UICorner_6 = Instance.new("UICorner")
+			local Content1 = Instance.new("TextLabel")
+			local UIStroke = Instance.new("UIStroke")
+			local Frame = Instance.new("Frame")
+			local UICorner_7 = Instance.new("UICorner")
+			local Ico = Instance.new("ImageLabel")
+			local TextButton = Instance.new("TextButton")
+
+			Toggle.Name = "Toggle"
+			Toggle.Parent = ItemContainer
+			Toggle.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Toggle.BorderSizePixel = 0
+			Toggle.Size = UDim2.new(1, 0, 0, 38)
+
+			UICorner_6.CornerRadius = UDim.new(0, 5)
+			UICorner_6.Parent = Toggle
+
+			UIStroke.Parent = Toggle
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			UIStroke.Thickness = 1
+
+			Content1.Name = "Content"
+			Content1.Parent = Toggle
+			Content1.BackgroundTransparency = 1.000
+			Content1.Position = UDim2.new(0, 12, 0, 0)
+			Content1.Size = UDim2.new(1, -12, 1, 0)
+			Content1.Font = Enum.Font.GothamBold
+			Content1.Text = ToggleValues.Name
+			Content1.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Content1.TextSize = 15.000
+			Content1.TextXAlignment = Enum.TextXAlignment.Left
+
+			Frame.Parent = Toggle
+			Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+			Frame.BackgroundColor3 = Color3.fromRGB(60, 60, 59)
+			Frame.BorderSizePixel = 0
+			Frame.Position = UDim2.new(1, -24, 0.5, 0)
+			Frame.Size = UDim2.new(0, 24, 0, 24)
+
+			UICorner_7.CornerRadius = UDim.new(0, 4)
+			UICorner_7.Parent = Frame
+
+			Ico.Name = "Ico"
+			Ico.Parent = Frame
+			Ico.AnchorPoint = Vector2.new(0.5, 0.5)
+			Ico.BackgroundTransparency = 1.000
+			Ico.Position = UDim2.new(0.5, 0, 0.5, 0)
+			Ico.Size = UDim2.new(0, 8, 0, 8)
+			Ico.Image = "rbxassetid://3944680095"
+			Ico.ImageTransparency = 1.000
+
+			TextButton.Parent = Toggle
+			TextButton.BackgroundTransparency = 1.000
+			TextButton.BorderSizePixel = 0
+			TextButton.Size = UDim2.new(1, 0, 1, 0)
+			TextButton.AutoButtonColor = false
+			TextButton.Text = ""
+
+			local function ChangeState(Bool)
+				if Bool == true then
+					if Toggle:FindFirstChild("Check") then
+						return
+					end
+					local CheckFrame = Instance.new("Frame")
+					CheckFrame.Position = UDim2.new(1,-24,0.5,0)
+					CheckFrame.AnchorPoint = Vector2.new(0.5,0.5)
+					CheckFrame.BackgroundColor3 = Color3.fromRGB(8, 99, 195)
+					CheckFrame.Size = UDim2.new(0,0,0,0)
+					CheckFrame.Parent = Toggle
+					CheckFrame.Name = "Check"
+					CheckFrame.BorderSizePixel = 0
+					local CheckFrame_Icon = Instance.new("ImageLabel")
+					CheckFrame_Icon.Image = "rbxassetid://3944680095"
+					CheckFrame_Icon.BackgroundTransparency = 1
+					CheckFrame_Icon.Parent = CheckFrame
+					CheckFrame_Icon.Size = UDim2.new(0,0,0,0)
+					CheckFrame_Icon.Position = UDim2.new(0.5,0,0.5,0)
+					CheckFrame_Icon.AnchorPoint = Vector2.new(0.5,0.5)
+					CheckFrame_Icon.BorderSizePixel = 0
+					CheckFrame_Icon.Parent = CheckFrame
+					local CheckFrame_UIStroke = Instance.new("UIStroke")
+					CheckFrame_UIStroke.Color = Color3.fromRGB(60, 60, 59)
+					CheckFrame_UIStroke.Thickness = 1
+					CheckFrame_UIStroke.Parent = CheckFrame
+					local CheckFrame_UICorner = Instance.new("UICorner")
+					CheckFrame_UICorner.CornerRadius = UDim.new(0,4)
+					CheckFrame_UICorner.Parent = CheckFrame
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Cubic,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					TweenService:Create(CheckFrame,Info,{Size = UDim2.new(0,24,0,24)}):Play()
+					TweenService:Create(CheckFrame_Icon,Info,{Size = UDim2.new(0,20,0,20)}):Play()
+				else
+					if Toggle:FindFirstChild("Check") == nil then
+						return
+					end
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Cubic,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					TweenService:Create(Toggle:FindFirstChild("Check"),Info,{Size = UDim2.new(0,0,0,0)}):Play()
+					TweenService:Create(Toggle:FindFirstChild("Check"):FindFirstChild("ImageLabel"),Info,{Size = UDim2.new(0,0,0,0)}):Play()
+					wait(0.1)
+					Toggle:FindFirstChild("Check"):Destroy()
+				end
+			end
+			ChangeState(ToggleValues.Default)
+			TextButton.MouseButton1Click:Connect(function()
+				if Toggle:FindFirstChild("Check") then
+					ChangeState(false)
+					ToggleValues.Callback(false)
+				else
+					ChangeState(true)
+					ToggleValues.Callback(true)
+				end
+			end)
+			function ToggleFunctions:Set(Bool)
+				ChangeState(Bool)
+			end
+			return ToggleFunctions
+		end
+		function TabFunctions:AddButton(ButtonInfo)
+			local ButtonFunctions = {}
+
+			local Button = Instance.new("Frame")
+			local UICorner_6 = Instance.new("UICorner")
+			local Content1 = Instance.new("TextLabel")
+			local ImageLabel_2 = Instance.new("ImageLabel")
+			local TextButton_3 = Instance.new("TextButton")
+			local UIStroke = Instance.new("UIStroke")
+
+			Button.Name = "Button"
+			Button.Parent = ItemContainer
+			Button.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Button.BorderSizePixel = 0
+			Button.Size = UDim2.new(1, 0, 0, 33)
+
+			UICorner_6.CornerRadius = UDim.new(0, 5)
+			UICorner_6.Parent = Button
+
+			Content1.Name = "Content"
+			Content1.Parent = Button
+			Content1.BackgroundTransparency = 1.000
+			Content1.Position = UDim2.new(0, 12, 0, 0)
+			Content1.Size = UDim2.new(1, -12, 1, 0)
+			Content1.Font = Enum.Font.GothamBold
+			Content1.Text = ButtonInfo.Name
+			Content1.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Content1.TextSize = 15.000
+			Content1.TextXAlignment = Enum.TextXAlignment.Left
+
+			ImageLabel_2.Parent = Button
+			ImageLabel_2.BackgroundTransparency = 1.000
+			ImageLabel_2.Position = UDim2.new(1, -30, 0, 7)
+			ImageLabel_2.Size = UDim2.new(0, 20, 0, 20)
+			ImageLabel_2.Image = "rbxassetid://3944703587"
+			ImageLabel_2.ImageColor3 = Color3.fromRGB(150, 150, 150)
+
+			TextButton_3.Parent = Button
+			TextButton_3.BackgroundTransparency = 1.000
+			TextButton_3.BorderSizePixel = 0
+			TextButton_3.Size = UDim2.new(1, 0, 1, 0)
+			TextButton_3.AutoButtonColor = false
+			TextButton_3.Text = ""
+
+			UIStroke.Parent = Button
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			UIStroke.Thickness = 1
+			TextButton_3.MouseButton1Click:Connect(function()
+				ButtonInfo.Callback()
+			end)
+			return ButtonFunctions
+		end
+		function TabFunctions:AddDropdown(DropdownInfo)
+			local DropdownFunctions = {}
+
+			local DropDown = Instance.new("Frame")
+			local UICorner_1 = Instance.new("UICorner")
+			local ScrollingFrame = Instance.new("ScrollingFrame")
+			local UIListLayout = Instance.new("UIListLayout")
+			local F = Instance.new("Frame")
+			local Content = Instance.new("TextLabel")
+			local Ico = Instance.new("ImageLabel")
+			local Selected = Instance.new("TextLabel")
+			local Line = Instance.new("Frame")
+			local TextButton_4 = Instance.new("TextButton")
+			local UIStroke = Instance.new("UIStroke")
+			--Properties:
+
+			DropDown.Name = "DropDown"
+			DropDown.Parent = ItemContainer
+			DropDown.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			DropDown.BorderSizePixel = 0
+			DropDown.Size = UDim2.new(1, 0, 0, 38)
+			DropDown.ClipsDescendants = true
+
+			UICorner_1.CornerRadius = UDim.new(0, 5)
+			UICorner_1.Parent = DropDown
+
+			ScrollingFrame.Parent = DropDown
+			ScrollingFrame.BackgroundTransparency = 1.000
+			ScrollingFrame.BorderSizePixel = 0
+			ScrollingFrame.Position = UDim2.new(0, 0, 0, 39)
+			ScrollingFrame.Size = UDim2.new(1, 0, 0, -38)
+			ScrollingFrame.Visible = false
+			ScrollingFrame.BottomImage = "rbxassetid://7445543667"
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+			ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			ScrollingFrame.MidImage = "rbxassetid://7445543667"
+			ScrollingFrame.ScrollBarThickness = 4
+			ScrollingFrame.TopImage = "rbxassetid://7445543667"
+
+			UIListLayout.Parent = ScrollingFrame
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+			F.Name = "F"
+			F.Parent = DropDown
+			F.BackgroundTransparency = 1.000
+			F.ClipsDescendants = true
+			F.Size = UDim2.new(1, 0, 0, 38)
+
+			Content.Name = "Content"
+			Content.Parent = F
+			Content.BackgroundTransparency = 1.000
+			Content.Position = UDim2.new(0, 12, 0, 0)
+			Content.Size = UDim2.new(1, -12, 1, 0)
+			Content.Font = Enum.Font.MontserratBold
+			Content.Text = DropdownInfo.Name
+			Content.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Content.TextSize = 15.000
+			Content.TextXAlignment = Enum.TextXAlignment.Left
+
+			Ico.Name = "Ico"
+			Ico.Parent = F
+			Ico.AnchorPoint = Vector2.new(0, 0.5)
+			Ico.BackgroundTransparency = 1.000
+			Ico.Position = UDim2.new(1, -30, 0.5, 0)
+			Ico.Size = UDim2.new(0, 20, 0, 20)
+			Ico.Image = "rbxassetid://7072706796"
+			Ico.ImageColor3 = Color3.fromRGB(150, 150, 150)
+
+			UIStroke.Parent = DropDown
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			UIStroke.Thickness = 1
+
+			Selected.Name = "Selected"
+			Selected.Parent = F
+			Selected.BackgroundTransparency = 1.000
+			Selected.Size = UDim2.new(1, -40, 1, 0)
+			Selected.Font = Enum.Font.Gotham
+			Selected.Text = "..."
+			Selected.TextColor3 = Color3.fromRGB(150, 150, 150)
+			Selected.TextSize = 13.000
+			Selected.TextXAlignment = Enum.TextXAlignment.Right
+
+			Line.Name = "Line"
+			Line.Parent = F
+			Line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+			Line.BorderSizePixel = 0
+			Line.Position = UDim2.new(0, 0, 1, -1)
+			Line.Size = UDim2.new(1, 0, 0, 1)
+			Line.Visible = false
+
+			TextButton_4.Parent = F
+			TextButton_4.BackgroundTransparency = 1.000
+			TextButton_4.BorderSizePixel = 0
+			TextButton_4.Size = UDim2.new(1, 0, 1, 0)
+			TextButton_4.AutoButtonColor = false
+			TextButton_4.Text = ""
+
+			local function SelectOption(Option)
+				Selected.Text = Option
+				for _, i in ipairs(ScrollingFrame:GetChildren()) do
+					if i:IsA("TextButton") then
+						if i.Title.Text == Option then
+							i.Title.TextTransparency = 0
+						else
+							i.Title.TextTransparency = 0.4
+						end
+					end
+				end
+				DropdownInfo.Callback(Option)
+			end
+
+			function DropdownFunctions:Set(Value)
+				SelectOption(Value)
+			end
+
+			function DropdownFunctions:Refresh(Options,bool)
+				if bool == true then
+					for _, i in ipairs(ScrollingFrame:GetChildren()) do
+						if i:IsA("TextButton") then
+							i:Destroy()
+						end
+					end
+				end
+				for _, Option in ipairs(Options) do
+
+					local TextButton_3 = Instance.new("TextButton")
+					local UICorner_6 = Instance.new("UICorner")
+					local Title_2 = Instance.new("TextLabel")
+
+					TextButton_3.Parent = ScrollingFrame
+					TextButton_3.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+					TextButton_3.BackgroundTransparency = 1.000
+					TextButton_3.BorderSizePixel = 0
+					TextButton_3.ClipsDescendants = true
+					TextButton_3.Size = UDim2.new(1, 0, 0, 28)
+					TextButton_3.AutoButtonColor = false
+					TextButton_3.Text = ""
+
+					UICorner_6.CornerRadius = UDim.new(0, 6)
+					UICorner_6.Parent = TextButton_3
+
+					Title_2.Name = "Title"
+					Title_2.Parent = TextButton_3
+					Title_2.BackgroundTransparency = 1.000
+					Title_2.Position = UDim2.new(0, 8, 0, 0)
+					Title_2.Size = UDim2.new(1, -8, 1, 0)
+					Title_2.Font = Enum.Font.Roboto
+					Title_2.Text = Option
+					Title_2.TextColor3 = Color3.fromRGB(240, 240, 240)
+					Title_2.TextSize = 13.000
+					Title_2.TextTransparency = 0.4
+					Title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+					TextButton_3.MouseButton1Click:Connect(function()
+						SelectOption(Option)
+					end)
+				end
+			end
+
+			for _, Option in ipairs(DropdownInfo.Options) do
+
+				local TextButton_3 = Instance.new("TextButton")
+				local UICorner_6 = Instance.new("UICorner")
+				local Title_2 = Instance.new("TextLabel")
+
+				TextButton_3.Parent = ScrollingFrame
+				TextButton_3.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+				TextButton_3.BackgroundTransparency = 1.000
+				TextButton_3.BorderSizePixel = 0
+				TextButton_3.ClipsDescendants = true
+				TextButton_3.Size = UDim2.new(1, 0, 0, 28)
+				TextButton_3.AutoButtonColor = false
+				TextButton_3.Text = ""
+
+				UICorner_6.CornerRadius = UDim.new(0, 6)
+				UICorner_6.Parent = TextButton_3
+
+				Title_2.Name = "Title"
+				Title_2.Parent = TextButton_3
+				Title_2.BackgroundTransparency = 1.000
+				Title_2.Position = UDim2.new(0, 8, 0, 0)
+				Title_2.Size = UDim2.new(1, -8, 1, 0)
+				Title_2.Font = Enum.Font.Roboto
+				Title_2.Text = Option
+				Title_2.TextColor3 = Color3.fromRGB(240, 240, 240)
+				Title_2.TextSize = 13.000
+				Title_2.TextTransparency = 0.4
+				Title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+				TextButton_3.MouseButton1Click:Connect(function()
+					SelectOption(Option)
+				end)
+			end
+
+			TextButton_4.MouseButton1Click:Connect(function()
+				if DropDown.Size == UDim2.new(1,0,0,38) then
+					local Size = UDim2.new(0,0,0,0)
+					for _, p in ipairs(ScrollingFrame:GetChildren()) do
+						if p:IsA("TextButton") then
+							Size += UDim2.new(1,0,0,28)
+						end
+					end
+					ScrollingFrame.Visible = true
+					ScrollingFrame.Size = Size
+					Line.Visible = true
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Cubic,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					TweenService:Create(DropDown,Info,{Size = UDim2.new(1,0,0,38+Size.Y.Offset)}):Play()
+				else
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Cubic,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					TweenService:Create(DropDown,Info,{Size = UDim2.new(1,0,0,38)}):Play()
+					wait(0.1)
+					ScrollingFrame.Visible = false
+					ScrollingFrame.Size = UDim2.new(1,0,0,0)
+					Line.Visible = false
+				end
+			end)
+			plr:GetMouse().Button1Down:Connect(function()
+				local Info = TweenInfo.new(
+					0.1,
+					Enum.EasingStyle.Cubic,
+					Enum.EasingDirection.Out,
+					0,
+					false,
+					0
+				)
+				TweenService:Create(DropDown,Info,{Size = UDim2.new(1,0,0,38)}):Play()
+				wait(0.1)
+				ScrollingFrame.Visible = false
+				ScrollingFrame.Size = UDim2.new(1,0,0,0)
+				Line.Visible = false
+			end)
+			return DropdownFunctions
+		end
+		function TabFunctions:AddSection(SectionInfo)
+			local SectionFunctions = {}
+
+			local Section = Instance.new("Frame")
+			local TextLabel_3 = Instance.new("TextLabel")
+			local Holder = Instance.new("Frame")
+			local UIListLayout_3 = Instance.new("UIListLayout")
+
+
+			Section.Name = "Section"
+			Section.Parent = ItemContainer
+			Section.BackgroundTransparency = 1.000
+			Section.Size = UDim2.new(1, 0, 0, 26)
+
+			TextLabel_3.Parent = Section
+			TextLabel_3.BackgroundTransparency = 1.000
+			TextLabel_3.Position = UDim2.new(0, 0, 0, 3)
+			TextLabel_3.Size = UDim2.new(1, -12, 0, 16)
+			TextLabel_3.Font = Enum.Font.GothamMedium
+			TextLabel_3.Text = SectionInfo.Name
+			TextLabel_3.TextColor3 = Color3.fromRGB(150, 150, 150)
+			TextLabel_3.TextSize = 14.000
+			TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+
+			Holder.Name = "Holder"
+			Holder.Parent = Section
+			Holder.BackgroundTransparency = 1.000
+			Holder.Position = UDim2.new(0, 0, 0, 23)
+			Holder.Size = UDim2.new(1, 0, 1, -24)
+
+			UIListLayout_3.Parent = Holder
+			UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+			UIListLayout_3.Padding = UDim.new(0, 6)
+
+			return SectionInfo
+		end
+		function TabFunctions:AddParagraph(Name,PContent)
+			local ParagraphFunctions = {}
+			local Paragraph = Instance.new("Frame")
+			local UICorner = Instance.new("UICorner")
+			local Title_2 = Instance.new("TextLabel")
+			local Content1 = Instance.new("TextLabel")
+			local UIStroke = Instance.new("UIStroke")
+
+			Paragraph.Name = "Paragraph"
+			Paragraph.Parent = ItemContainer
+			Paragraph.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Paragraph.BackgroundTransparency = 0.700
+			Paragraph.BorderSizePixel = 0
+			Paragraph.Size = UDim2.new(1, 0, 0, 48)
+
+			UICorner.CornerRadius = UDim.new(0, 5)
+			UICorner.Parent = Paragraph
+
+			Title_2.Name = "Title"
+			Title_2.Parent = Paragraph
+			Title_2.BackgroundTransparency = 1.000
+			Title_2.Position = UDim2.new(0, 12, 0, 10)
+			Title_2.Size = UDim2.new(1, -12, 0, 14)
+			Title_2.Text = Name
+			Title_2.Font = Enum.Font.MontserratBold
+			Title_2.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Title_2.TextSize = 15.000
+			Title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+			Content1.Name = "Content"
+			Content1.Parent = Paragraph
+			Content1.BackgroundTransparency = 1.000
+			Content1.Position = UDim2.new(0, 12, 0, 26)
+			Content1.Size = UDim2.new(1, -24, 0, 13)
+			Content1.AutomaticSize = Enum.AutomaticSize.Y
+			Content1.Text = PContent
+			Content1.TextColor3 = Color3.fromRGB(150, 150, 150)
+			Content1.TextSize = 13.000
+			Content1.Font = Enum.Font.MontserratMedium
+			Content1.TextWrapped = true
+			Content1.TextXAlignment = Enum.TextXAlignment.Left
+
+			UIStroke.Parent = Paragraph
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			UIStroke.Thickness = 1
+
+			if PContent == "" then
+				Paragraph.Size = UDim2.new(1, 0, 0, 35)
+			else
+				Paragraph.AutomaticSize = Enum.AutomaticSize.Y
+				wait(0.1)
+				Paragraph.Size += UDim2.new(0,0,0,Content1.AbsoluteSize.Y-10)
+				Paragraph.AutomaticSize = Enum.AutomaticSize.None
+			end
+
+			function ParagraphFunctions:Set(NewName,NewContent)
+				Title_2.Text = NewName
+				Content1.Text = NewContent
+				if NewContent == "" then
+					Paragraph.Size = UDim2.new(1, 0, 0, 35)
+				else
+					Paragraph.Size = UDim2.new(1, 0, 0, 48)
+					Paragraph.AutomaticSize = Enum.AutomaticSize.Y
+					wait(0.1)
+					Paragraph.Size += UDim2.new(0,0,0,Content1.AbsoluteSize.Y-10)
+					Paragraph.AutomaticSize = Enum.AutomaticSize.None
+				end
+			end
+
+			return ParagraphFunctions
+		end
+		function TabFunctions:SetTab()
+			for _, Tab in ipairs(Orion:GetChildren()) do
+				if Tab:IsA("ScrollingFrame") then
+					Tab.Visible = false
+				end
+			end
+			for _, Tab in ipairs(Tabs:GetChildren()) do
+				if Tab:IsA("TextButton") then
+					Tab.TextLabel.TextTransparency = 0.4
+					Tab.TextLabel.Font = Enum.Font.MontserratMedium
+					Tab.Icon.ImageTransparency = 0.4
+				end
+			end
+			ItemContainer.Visible = true
+			TabButton_Title.Font = Enum.Font.MontserratBlack
+			TabButton_Title.TextTransparency = 0
+			TabButton_Icon.ImageTransparency = 0
+		end
+		function TabFunctions:AddSlider(SliderInfo)
+			local Slider = Instance.new("Frame")
+			local Slider_UICorner = Instance.new("UICorner")
+			local Slider_UIStroke = Instance.new("UIStroke")
+			local Slider_Title = Instance.new("TextLabel")
+			local SliderFrame = Instance.new("Frame")
+			local SliderFrame_UICorner = Instance.new("UICorner")
+			local SliderFrame_UIStroke = Instance.new("UIStroke")
+			local Slider_Value = Instance.new("TextLabel")
+			local SliderMeter = Instance.new("Frame")
+			local SliderMeter_UICorner = Instance.new("UICorner")
+			local Slider_Value_2 = Instance.new("TextLabel")
+
+			Slider.Name = "Slider"
+			Slider.Parent = ItemContainer
+			Slider.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Slider.BorderSizePixel = 0
+			Slider.Size = UDim2.new(1, 0, 0, 65)
+
+			Slider_UICorner.CornerRadius = UDim.new(0, 4)
+			Slider_UICorner.Parent = Slider
+
+			Slider_UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			Slider_UIStroke.Parent = Slider
+
+			Slider_Title.Name = "Content"
+			Slider_Title.Parent = Slider
+			Slider_Title.BackgroundTransparency = 1.000
+			Slider_Title.Position = UDim2.new(0, 12, 0, 10)
+			Slider_Title.Size = UDim2.new(1, -12, 0, 14)
+			Slider_Title.Font = Enum.Font.GothamBold
+			Slider_Title.Text = SliderInfo.Name
+			Slider_Title.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Slider_Title.TextSize = 15.000
+			Slider_Title.TextXAlignment = Enum.TextXAlignment.Left
+
+			SliderFrame.Parent = Slider
+			SliderFrame.BackgroundColor3 = SliderInfo.Color
+			SliderFrame.BackgroundTransparency = 0.9
+			SliderFrame.BorderSizePixel = 0
+			SliderFrame.Position = UDim2.new(0, 12, 0, 30)
+			SliderFrame.Size = UDim2.new(1, -24, 0, 26)
+			SliderFrame.Active = true
+
+			SliderFrame_UICorner.CornerRadius = UDim.new(0, 5)
+			SliderFrame_UICorner.Parent = SliderFrame
+
+			SliderFrame_UIStroke.Color = SliderInfo.Color
+			SliderFrame_UIStroke.Parent = SliderFrame
+
+			Slider_Value.Name = "Value"
+			Slider_Value.Parent = SliderFrame
+			Slider_Value.BackgroundTransparency = 1.000
+			Slider_Value.Position = UDim2.new(0, 12, 0, 6)
+			Slider_Value.Size = UDim2.new(1, -12, 0, 14)
+			Slider_Value.Font = Enum.Font.GothamBold
+			Slider_Value.Text = tostring(SliderInfo.Default).." "..SliderInfo.ValueName
+			Slider_Value.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Slider_Value.TextSize = 13.000
+			Slider_Value.TextTransparency = 0.800
+			Slider_Value.TextXAlignment = Enum.TextXAlignment.Left
+
+			SliderMeter.Parent = SliderFrame
+			SliderMeter.BackgroundColor3 = SliderInfo.Color
+			SliderMeter.BackgroundTransparency = 0.300
+			SliderMeter.BorderSizePixel = 0
+			SliderMeter.ClipsDescendants = true
+			SliderMeter.Size = UDim2.new((1/SliderInfo.Max)*SliderInfo.Default, 0, 1, 0)
+			SliderMeter.Position = UDim2.new(0,0,0,13)
+			SliderMeter.AnchorPoint = Vector2.new(0,0.5)
+
+			SliderMeter_UICorner.CornerRadius = UDim.new(0, 5)
+			SliderMeter_UICorner.Parent = SliderMeter
+
+			Slider_Value_2.Name = "Value"
+			Slider_Value_2.Parent = SliderMeter
+			Slider_Value_2.BackgroundTransparency = 1.000
+			Slider_Value_2.Position = UDim2.new(0, 12, 0, 6)
+			Slider_Value_2.Size = UDim2.new(1, -12, 0, 14)
+			Slider_Value_2.Font = Enum.Font.GothamBold
+			Slider_Value_2.Text = tostring(SliderInfo.Default).." "..SliderInfo.ValueName
+			Slider_Value_2.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Slider_Value_2.TextSize = 13.000
+			Slider_Value_2.TextXAlignment = Enum.TextXAlignment.Left
+
+			local SliderDragging = false
+
+			SliderFrame.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					SliderDragging = true
+				end
+			end)
+
+			UIS.InputEnded:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					SliderDragging = false
+				end
+			end)
+
+			UIS.InputChanged:Connect(function(input)
+				if SliderDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					local mousePos = input.Position.X
+					local sliderBarPos = SliderFrame.AbsolutePosition.X
+					local sliderWidth = SliderFrame.AbsoluteSize.X
+
+					local newWidth = math.clamp(mousePos - sliderBarPos, 0, sliderWidth)
+
+					newWidth = math.floor(newWidth / SliderInfo.Increment) * SliderInfo.Increment
+
+					local value = math.floor((newWidth / sliderWidth) * (SliderInfo.Max - SliderInfo.Min) + SliderInfo.Min)
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Linear,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					--newWidth = ((1/SliderInfo.Max)*value)
+					TweenService:Create(SliderMeter,Info,{Size = UDim2.new(0,newWidth, SliderMeter.Size.Y.Scale, SliderMeter.Size.Y.Offset)}):Play()
+					SliderInfo.Callback(value)
+					if SliderInfo["ValueName"] then
+						value = value.." "..SliderInfo["ValueName"]
+					end
+					Slider_Value.Text = value
+					Slider_Value_2.Text = value
+				end
+			end)
+
+
+		end
+		return TabFunctions
+	end
+	function WindowFunctions:SetKeyBind(KeyBind)
+		plr:GetMouse().KeyDown:Connect(function(key)
+			if key == KeyBind then
+				OrionGui.Enabled = not OrionGui.Enabled
+			end
+		end)
+	end
+	return WindowFunctions
+end
+function OrionLib:Destroy()
+	OrionLib[1]:Destroy()
+end
+function OrionLib:Init()
+	OrionLib[1].Enabled = true
+end
+
+
+--VARIABLES--
+local plr = game.Players.LocalPlayer
+local UIS = game:GetService("UserInputService")
+local Debris = game:GetService("Debris")
+local SpawnedInToys = workspace:WaitForChild(plr.Name.."SpawnedInToys")
+local SpawnToyRemoteFunction = game.ReplicatedStorage.MenuToys.SpawnToyRemoteFunction
+local SetNetworkOwner = game.ReplicatedStorage.GrabEvents.SetNetworkOwner
+local DestroyGrabline = game.ReplicatedStorage.GrabEvents.DestroyGrabLine
+local DestroyToy = game.ReplicatedStorage.MenuToys.DestroyToy
+
+local WalkSpeed_Value = 16
+local ThrowPower_Value = 60
+local DrawerCannon_Value = 1
+
+local JumpPower_Toggle = false
+local InfiniteJump_Toggle = false
+local BlobmanTarget_Value = ""
+local LoopTarget_Value = ""
+local ImmunityTarget_Value = ""
+local WalkSpeed_Toggle = false
+local PoisonGrab_Toggle = false
+local RadiationGrab_Toggle = false
+local FireGrab_Toggle = false
+local MasslessGrab_Toggle = false
+local NoclipGrab_Toggle = false
+local DestroyGrab_Toggle = false
+local KillGrab_Toggle = false
+local KillAll_Toggle = false
+local RadiationAll_Toggle = false
+local FireAll_Toggle = false
+local ThrowPower_Toggle = false
+local DrawerCannon_Toggle = false
+local DrawerCannonAutoLoad_Toggle = false
+local DrawerCannonAutoShoot_Toggle = false
+local CrazyLine_Toggle = false
+
+local Invisible_Function = nil
+local AntiGrab_Function = nil
+local AntiFire_Function = nil
+local AntiExplosionV2_Function = nil
+local AntiSticky_Function = nil
+local AntiKick_Function = nil
+local InvisibleLine_Function = nil
+local AutoFarm_Function = nil
+local FireAll_Function = nil
+local Noclip_Function = nil
+local LoopKill_Function = nil
+local OtherAntiGrab_Function = nil
+local RainbowLine_Function = nil
+
+local FirePartToy = "Campfire"
+local RadiationPartToy = "UFO"
+--FUNCTIONS--
+function GetPlayerList(Bool,Bool2)
+	local List = {}
+	for _, Player in ipairs(game.Players:GetPlayers()) do
+		if Player == plr and Bool == true then
+			if Bool2 == true then
+				table.insert(List,Player.Name.."("..Player.DisplayName..")")
+			else
+				table.insert(List,Player.Name)
+			end
+		elseif Player ~= plr then
+			if Bool2 == true then
+				table.insert(List,Player.Name.."("..Player.DisplayName..")")
+			else
+				table.insert(List,Player.Name)
+			end
+		end
+	end
+	return List
+end
+function GetNetworkOwner(Toy)
+	for _, PartOwner in ipairs(Toy:GetDescendants()) do
+		if PartOwner:IsA("StringValue") and PartOwner.Name == "PartOwner" then
+			return PartOwner.Value
+		end
+	end
+	return nil
+end
+function GetToysSpawned(ToyName)
+	local n = 0
+	for _, Toy in ipairs(SpawnedInToys:GetChildren()) do
+		if Toy:IsA("Model") and Toy.Name == ToyName then
+			n += 1
+		end
+	end
+	return n
+end
+function GetPlayerFromDisplayName(Text)
+	for _, Player in ipairs(game.Players:GetPlayers()) do
+		if string.find(Text,Player.Name) then
+			return Player
+		end
+	end
+	return nil
+end
+function GetBlob()
+	local chr = plr.Character
+	local hrp = chr:WaitForChild("HumanoidRootPart")
+	local hum = chr:WaitForChild("Humanoid")
+	for _, blobs in workspace:GetDescendants() do
+		if blobs.Name ~= "CreatureBlobman" then continue end
+		if not blobs:FindFirstChild("VehicleSeat") then continue end
+		if not blobs.VehicleSeat:FindFirstChild("SeatWeld") then continue end
+		if blobs.VehicleSeat.SeatWeld.Part1 == hrp then
+			return blobs
+		end
+	end
+end
+function BlobGrab(Blob,Target,Side)
+	local chr = plr.Character
+	local hrp = chr:WaitForChild("HumanoidRootPart")
+	local hum = chr:WaitForChild("Humanoid")
+	local args = {
+		[1] = Blob:FindFirstChild(Side.."Detector"),
+		[2] = Target,
+		[3] = Blob:FindFirstChild(Side.."Detector"):FindFirstChild(Side.."Weld"),
+	}
+	Blob.BlobmanSeatAndOwnerScript.CreatureGrab:FireServer(unpack(args))
+end
+function BlobDrop(Blob,Target,Side)
+	local chr = plr.Character
+	local hrp = chr:WaitForChild("HumanoidRootPart")
+	local hum = chr:WaitForChild("Humanoid")
+	local args = {
+		[1] = Blob:FindFirstChild(Side.."Detector"):FindFirstChild(Side.."Weld"),
+		[2] = Target,
+	}
+	Blob.BlobmanSeatAndOwnerScript.CreatureDrop:FireServer(unpack(args))
+end
+function KillAll()
+	while KillAll_Toggle == true do
+		for _, Player in ipairs(game.Players:GetPlayers()) do
+			if KillAll_Toggle == true and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("HumanoidRootPart").AssemblyLinearVelocity.Magnitude < 1000 and Player ~= plr and Player.InPlot.Value == false then
+				local TargetHRP = Player.Character:FindFirstChild("HumanoidRootPart")
+				local HRP = plr.Character
+				local Character = Player.Character
+				local Original = plr.Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+				wait(0.1)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+				wait(0.05)
+				DestroyGrabline:FireServer(Character.Torso)
+				wait(0.05)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0,-9999,0)
+				plr.Character.HumanoidRootPart.CFrame = Original
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Original
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+			end
+		end
+		wait(0.05)
+	end
+end
+function RadiationAll()
+	while RadiationAll_Toggle == true do
+		for _, Player in ipairs(game.Players:GetPlayers()) do
+			if RadiationAll_Toggle == true and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") and Player ~= plr then
+				if RadiationPartToy == "UFO" and Player.InPlot.Value == false and Player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("PaintPointLight") == nil then
+					local TargetHRP = Player.Character:FindFirstChild("HumanoidRootPart")
+					local HRP = plr.Character
+					local Character = Player.Character
+					local Original = plr.Character.HumanoidRootPart.CFrame
+					local Lazer  = workspace.Map.AlwaysHereTweenedObjects.OuterUFO.Object.ObjectModel:FindFirstChild("PaintPlayerPart")
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Original
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Position = Vector3.new(0,1000,0)
+					DestroyGrabline:FireServer(Character.Torso)
+				elseif RadiationPartToy == "OvenMicrowaveWhite" then
+					if SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") == nil then
+						SpawnToyRemoteFunction:InvokeServer("OvenMicrowaveWhite",CFrame.new(Vector3.new(0,0,0)),Vector3.new(0,0,0))
+						wait(0.1)
+					elseif SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") and GetNetworkOwner(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")) ~= plr.Name then
+						local Original = plr.Character.HumanoidRootPart.CFrame
+						plr.Character.HumanoidRootPart.CFrame = CFrame.new(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.Position + Vector3.new(0,10,0))
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait(0.05)
+						SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart"),SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart").CFrame)
+						wait(0.05)
+						plr.Character.HumanoidRootPart.CFrame = CFrame.new(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.Position + Vector3.new(0,10,0))
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait(0.05)
+						SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart"),SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart").CFrame)
+						wait(0.05)
+						plr.Character.HumanoidRootPart.CFrame = Original
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait()
+						plr.Character.HumanoidRootPart.CFrame = Original
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					elseif SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") and GetNetworkOwner(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")) == plr.Name and SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 then
+						while SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 or SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") == nil do
+							if SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") and SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 then
+								plr.Character.HumanoidRootPart.CFrame = CFrame.new(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.Position + Vector3.new(0,10,0))
+								plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+								wait(0.05)
+								SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button,SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.CFrame)
+								wait(0.2)
+							end
+						end
+					end
+					
+					if SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") then
+						local OvenMicrowaveWhite = SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")
+						if OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyPosition") == nil then
+							local BP = Instance.new("BodyPosition")
+							BP.P = 5000
+							BP.D = 100
+							BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+							BP.Parent = OvenMicrowaveWhite.PrimaryPart
+							BP = Vector3.new(0,90,0)
+							if OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyGyro") == nil then
+								local BG = Instance.new("BodyGyro")
+								BG.P = 5000
+								BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+								BG.D = 100
+								BG.CFrame = CFrame.new(0,0,0)
+								BG.Parent = OvenMicrowaveWhite.PrimaryPart
+							end
+						end
+						local BP = OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyPosition")
+						BP.Position = Player.Character.HumanoidRootPart.Position + Vector3.new(0,100,0)
+						OvenMicrowaveWhite.PaintPlayerPart.Size = Vector3.new(50,200,50)
+						wait(0.1)
+					end
+				end
+			end
+		end
+		wait(0.05)
+	end
+end
+function FireAll()
+	while FireAll_Toggle == true do
+		for _, Player in ipairs(game.Players:GetPlayers()) do
+			if FireAll_Toggle == true and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("PaintPointLight") == nil and Player ~= plr and Player.InPlot.Value == false then
+				if RadiationPartToy == "UFO" then
+					local TargetHRP = Player.Character:FindFirstChild("HumanoidRootPart")
+					local HRP = plr.Character
+					local Character = Player.Character
+					local Original = plr.Character.HumanoidRootPart.CFrame
+					local Lazer  = workspace.Map.AlwaysHereTweenedObjects.OuterUFO.Object.ObjectModel:FindFirstChild("PaintPlayerPart")
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					Lazer.Size = Vector3.new(3,3,3)
+					Lazer.Position = Character.HumanoidRootPart.Position
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Original
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					Lazer.Position = Vector3.new(0,1000,0)
+					DestroyGrabline:FireServer(Character.Torso)
+				elseif RadiationPartToy == "OvenMicrowaveWhite" then
+					if SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") == nil then
+						SpawnToyRemoteFunction:InvokeServer("OvenMicrowaveWhite",CFrame.new(Vector3.new(0,0,0)),Vector3.new(0,0,0))
+					elseif SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") and GetNetworkOwner(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")) ~= plr.Name then
+						local Original = plr.Character.HumanoidRootPart.CFrame
+						plr.Character.HumanoidRootPart.CFrame = SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.CFrame
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait(0.05)
+						SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart"),SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart").CFrame)
+						wait(0.05)
+						plr.Character.HumanoidRootPart.CFrame = SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.CFrame
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait(0.05)
+						SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart"),SpawnedInToys:FindFirstChild("OvenMicrowaveWhite"):FindFirstChild("SoundPart").CFrame)
+						wait(0.05)
+						plr.Character.HumanoidRootPart.CFrame = Original
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						wait()
+						plr.Character.HumanoidRootPart.CFrame = Original
+						plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					elseif SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") and GetNetworkOwner(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")) == plr.Name and SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 then
+						while SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 do
+							if SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.Transparency == 0 then
+								plr.Character.HumanoidRootPart.CFrame = SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").PrimaryPart.CFrame
+								plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+								wait(0.05)
+								SetNetworkOwner:FireServer(SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button,SpawnedInToys:FindFirstChild("OvenMicrowaveWhite").Button.CFrame)
+								wait(0.2)
+							end
+						end
+					end
+					local OvenMicrowaveWhite = SpawnedInToys:FindFirstChild("OvenMicrowaveWhite")
+					if OvenMicrowaveWhite then
+						if OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyPosition") == nil then
+							local BP = Instance.new("BodyPosition")
+							BP.P = 5000
+							BP.D = 100
+							BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+							BP.Parent = OvenMicrowaveWhite.PrimaryPart
+							BP = Vector3.new(0,50,0)
+							if OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyGyro") == nil then
+								local BG = Instance.new("BodyGyro")
+								BG.P = 5000
+								BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+								BG.D = 100
+								BG.CFrame = CFrame.new(0,0,0)
+								BG.Parent = OvenMicrowaveWhite.PrimaryPart
+							end
+						end
+						local BP = OvenMicrowaveWhite.PrimaryPart:FindFirstChild("BodyPosition")
+						for _, Player in ipairs(game.Players:GetPlayers()) do
+							if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") and SpawnedInToys:FindFirstChild("OvenMicrowaveWhite") then
+								BP.Position = Player.Character.HumanoidRootPart.Position + Vector3.new(0,50,0)
+								wait(0.2)
+								OvenMicrowaveWhite.PaintPlayerPart.Size = Vector3.new(50,200,50)
+							end
+						end
+					end
+				end
+			end
+		end
+		wait(0.05)
+	end
+end
+function ThrowPart(Part)
+	local char = plr.Character
+	local hrp = char:WaitForChild("HumanoidRootPart")
+	local hum = char:WaitForChild("Humanoid")
+	if Part and Part.Parent and ThrowPower_Value then
+		local velocityObj = Instance.new("BodyVelocity", Part)
+		velocityObj.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+		velocityObj.Velocity = workspace.CurrentCamera.CFrame.lookVector * ThrowPower_Value
+		Debris:AddItem(velocityObj, 0.1)
+	end
+end
+function DrawerCannon()
+	local KeyBindShoot = nil
+	KeyBindShoot = UIS.InputBegan:Connect(function(Input)
+		if Input.KeyCode == Enum.KeyCode.Q then
+			for _, Drawer in ipairs(SpawnedInToys:GetChildren()) do
+				if Drawer:IsA("Model") and Drawer.Name == "DrawerLightBrown" then
+					if Drawer.PrimaryPart:FindFirstChild("BodyVelocity") == nil then
+						Drawer.Name = "Trashed"
+						if Drawer.PrimaryPart:FindFirstChild("BodyPosition") then
+							Drawer.PrimaryPart:FindFirstChild("BodyPosition"):Destroy()
+						end
+						local velocityObj = Instance.new("BodyVelocity", Drawer.PrimaryPart)
+						velocityObj.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+						velocityObj.Velocity = (workspace.CurrentCamera.CFrame.lookVector * 1000)-Vector3.new(0,500,0)
+						task.spawn(function()
+							wait(6)
+							DestroyToy:FireServer(Drawer)
+						end)
+					end
+
+				end
+			end
+		end
+	end)
+	while DrawerCannon_Toggle == true do
+		local chr = plr.Character
+		local hrp = chr:WaitForChild("HumanoidRootPart")
+		local hum = chr:WaitForChild("Humanoid")
+		while GetToysSpawned("DrawerLightBrown") < DrawerCannon_Value do
+			if GetToysSpawned("DrawerLightBrown") < DrawerCannon_Value and DrawerCannonAutoLoad_Toggle == true then
+				SpawnToyRemoteFunction:InvokeServer("DrawerLightBrown",CFrame.new(plr.Character.Head.Position+Vector3.new(0,20,0)),Vector3.new(0,0,0))
+				wait(0.1)
+			end
+			wait()
+		end
+		local OriginalPosition = hrp.CFrame
+		for _, Drawer in ipairs(SpawnedInToys:GetChildren()) do
+			if Drawer:IsA("Model") and Drawer.Name == "DrawerLightBrown" and Drawer.Part:FindFirstChild("PartOwner") == nil then
+				if Drawer.PrimaryPart:FindFirstChild("BodyPosition") then
+					Drawer.PrimaryPart:FindFirstChild("BodyPosition"):Destroy()
+				end
+				hrp.CFrame = CFrame.new(Drawer:GetPivot().Position + Vector3.new(0,0,15))
+				hrp.AssemblyLinearVelocity = Vector3.zero
+				wait(0.01)
+				hrp.CFrame = CFrame.new(Drawer:GetPivot().Position + Vector3.new(0,0,15))
+				hrp.AssemblyLinearVelocity = Vector3.zero
+				SetNetworkOwner:FireServer(Drawer.Part,Drawer.Part.CFrame)
+				wait(0.01)
+				hrp.CFrame = CFrame.new(Drawer:GetPivot().Position + Vector3.new(0,0,15))
+				hrp.AssemblyLinearVelocity = Vector3.zero
+				SetNetworkOwner:FireServer(Drawer.Part,Drawer.Part.CFrame)
+				wait(0.01)
+				hrp.CFrame = CFrame.new(Drawer:GetPivot().Position + Vector3.new(0,0,15))
+				hrp.AssemblyLinearVelocity = Vector3.zero
+				SetNetworkOwner:FireServer(Drawer.Part,Drawer.Part.CFrame)
+				wait(0.05)
+				hrp.CFrame = OriginalPosition
+				hrp.AssemblyLinearVelocity = Vector3.zero
+				if Drawer.PrimaryPart:FindFirstChild("BodyVelocity") == nil and DrawerCannonAutoShoot_Toggle == true then
+					Drawer.Name = "Trashed"
+					if Drawer.PrimaryPart:FindFirstChild("BodyPosition") then
+						Drawer.PrimaryPart:FindFirstChild("BodyPosition"):Destroy()
+					end
+					local velocityObj = Instance.new("BodyVelocity", Drawer.PrimaryPart)
+					velocityObj.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+					velocityObj.Velocity = (workspace.CurrentCamera.CFrame.lookVector * 1000)-Vector3.new(0,500,0)
+					task.spawn(function()
+						wait(6)
+						DestroyToy:FireServer(Drawer)
+					end)
+				end
+			end
+		end
+		for _, Drawer in ipairs(SpawnedInToys:GetChildren()) do
+			if Drawer:IsA("Model") and Drawer.Name == "DrawerLightBrown"  then
+				if Drawer.PrimaryPart:FindFirstChild("BodyPosition") then
+					local BodyPosition = Drawer.PrimaryPart:FindFirstChild("BodyPosition")
+					BodyPosition.Position = hrp.Position + Vector3.new(0,50,0)
+					BodyPosition.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+					BodyPosition.Parent = Drawer.PrimaryPart
+					BodyPosition.P = 99999
+					BodyPosition.D = 500
+				else
+					local BodyPosition = Instance.new("BodyPosition")
+					BodyPosition.Position = hrp.Position + Vector3.new(0,50,0)
+					BodyPosition.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+					BodyPosition.Parent = Drawer.PrimaryPart
+					BodyPosition.P = 99999
+					BodyPosition.D = 500
+				end
+			end
+		end
+		wait()
+	end
+	KeyBindShoot:Disconnect()
+	for _, Drawer in ipairs(SpawnedInToys:GetChildren()) do
+		if Drawer:IsA("Model") and Drawer.Name == "DrawerLightBrown" then
+			if Drawer.PrimaryPart:FindFirstChild("BodyPosition") then
+				Drawer.PrimaryPart:FindFirstChild("BodyPosition"):Destroy()
+			end
+		end
+	end
+end
+function CrazyLine()
+	while CrazyLine_Toggle == true do
+		for _, Player in ipairs(game.Players:GetPlayers()) do
+			if Player.Character and Player ~= plr then
+				game.ReplicatedStorage.GrabEvents.CreateGrabLine:FireServer(Player.Character.Head,CFrame.new(0,0,0))
+				wait()
+			end
+		end
+		wait()
+	end
+end
+--BOOT UP LIBRARY --
+
+local Window = OrionLib:MakeWindow({Name = "Abyss V3", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+Window:SetKeyBind("m")
+
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://111710592722438",
+	PremiumOnly = false
+})
+
+local CombatTab = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://92173403913690",
+	PremiumOnly = false
+})
+
+local ImmunityTab = Window:MakeTab({
+	Name = "Immunity",
+	Icon = "rbxassetid://101974115680902",
+	PremiumOnly = false
+})
+
+local MiskTab = Window:MakeTab({
+	Name = "Misk",
+	Icon = "rbxassetid://98077714911666",
+	PremiumOnly = false
+})
+
+local LineTab = Window:MakeTab({
+	Name = "Line",
+	Icon = "rbxassetid://73970951482717",
+	PremiumOnly = false
+})
+
+local BlobmanTab = Window:MakeTab({
+	Name = "Blobman",
+	Icon = "rbxassetid://135844959235980",
+	PremiumOnly = false
+})
+
+local ExplodeTab = Window:MakeTab({
+	Name = "Explode",
+	Icon = "rbxassetid://135844959235980",
+	PremiumOnly = false
+})
+
+local LoopTab = Window:MakeTab({
+	Name = "Loop",
+	Icon = "rbxassetid://82991222458639",
+	PremiumOnly = false
+})
+
+local AutoTab = Window:MakeTab({
+	Name = "Auto",
+	Icon = "rbxassetid://82991222458639",
+	PremiumOnly = false
+})
+
+local ConfigurationTab = Window:MakeTab({
+	Name = "Configuration",
+	Icon = "rbxassetid://116947503696913",
+	PremiumOnly = false
+})
+
+local CreditsTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://116947503696913",
+	PremiumOnly = false
+})
+
+
+PlayerTab:AddSection({Name = "Player Stats"})
+
+PlayerTab:AddToggle({
+	Name = "Walk Speed",
+	Default = false,
+	Callback = function(Value)
+		WalkSpeed_Toggle = Value
+	end  
+})
+PlayerTab:AddSlider({
+	Name = "Speed",
+	Min = 16,
+	Max = 200,
+	Default = 16,
+	Color = Color3.fromRGB(255, 255, 255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Value)
+		WalkSpeed_Value = Value
+	end    
+})
+PlayerTab:AddToggle({
+	Name = "JumpPower",
+	Default = false,
+	Callback = function(Value)
+		JumpPower_Toggle = Value
+		if Value == false then
+			plr.Character.Humanoid.JumpPower = 30
+		end
+	end  
+})
+PlayerTab:AddSlider({
+	Name = "Power",
+	Min = 30,
+	Max = 200,
+	Default = 16,
+	Color = Color3.fromRGB(255, 255, 255),
+	Increment = 1,
+	ValueName = "Power",
+	Callback = function(Value)
+		plr.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+PlayerTab:AddSection({Name = "Player Functions"})
+
+PlayerTab:AddToggle({
+	Name = "Locked Camera",
+	Default = true,
+	Callback = function(Value)
+		if Value == true then
+			game.Players.LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
+			game.Players.LocalPlayer.CameraMaxZoomDistance = 0.5
+		else
+			game.Players.LocalPlayer.CameraMode = Enum.CameraMode.Classic
+			game.Players.LocalPlayer.CameraMaxZoomDistance = 100000
+		end
+	end  
+})
+PlayerTab:AddToggle({
+	Name = "Infinite Jump",
+	Default = false,
+	Callback = function(Value)
+		InfiniteJump_Toggle = Value
+	end  
+})
+PlayerTab:AddToggle({
+	Name = "Invisible",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			Invisible_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				game.ReplicatedStorage.CharacterEvents.Look:FireServer(CFrame.new(Vector3.new(0,0,0)), CFrame.new(Vector3.new(0,-20,0)),CFrame.new(Vector3.new(0,0,0)), "high")
+				plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = false
+			end)
+			for _, Part in ipairs(plr.Character:GetChildren()) do
+				if Part:IsA("BasePart") and Part.Name ~= "HumanoidRootPart" or Part.Name ~= "CamPart" then
+					Part.Transparency = 1
+				end
+			end
+		else
+			Invisible_Function:Disconnect()
+			plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = true
+			for _, Part in ipairs(plr.Character:GetChildren()) do
+				if Part:IsA("BasePart") and Part.Name ~= "HumanoidRootPart" or Part.Name ~= "CamPart" then
+					Part.Transparency = 0
+				end
+			end
+		end
+	end  
+})
+PlayerTab:AddToggle({
+	Name = "Headless",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			game.ReplicatedStorage.CharacterEvents.Look:FireServer(CFrame.new(Vector3.new(0,-100,0)), CFrame.new(Vector3.new(0,0,0))*CFrame.Angles(math.rad(90),math.rad(180),math.rad(0)),CFrame.new(Vector3.new(1,0.5,0))*CFrame.Angles(math.rad(0),math.rad(90),math.rad(0)), "high")
+			plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = false
+			wait(0.1)
+			game.ReplicatedStorage.CharacterEvents.Look:FireServer(CFrame.new(Vector3.new(0,-100,0)), CFrame.new(Vector3.new(0,0,0))*CFrame.Angles(math.rad(90),math.rad(180),math.rad(0)),CFrame.new(Vector3.new(1,0.5,0))*CFrame.Angles(math.rad(0),math.rad(90),math.rad(0)), "high")
+		else
+			plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = true
+		end
+	end  
+})
+PlayerTab:AddToggle({
+	Name = "Noclip",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			Noclip_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				plr.Character:WaitForChild("Torso").CanCollide = false
+				plr.Character:WaitForChild("Head").CanCollide = false
+				plr.Character:WaitForChild("Torso").Changed:Connect(function()
+					if Noclip_Function ~= nil then
+						plr.Character:WaitForChild("Torso").CanCollide = false
+						plr.Character:WaitForChild("Head").CanCollide = false
+					end
+				end)
+
+			end)
+		else
+			Noclip_Function:Disconnect()
+			Noclip_Function = nil
+			plr.Character:WaitForChild("Torso").CanCollide = true
+			plr.Character:WaitForChild("Head").CanCollide = true
+		end
+	end  
+})
+
+ImmunityTab:AddSection({Name = "Invincibility"})
+
+ImmunityTab:AddToggle({
+	Name = "Anti-Grab",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			AntiGrab_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local chr = plr.Character
+				local HRP = chr:WaitForChild("HumanoidRootPart")
+				if plr:WaitForChild("IsHeld").Value == true then
+					if HRP ~= nil then
+						HRP.Anchored = true
+						while plr.IsHeld.Value == true do game.ReplicatedStorage.CharacterEvents.Struggle:FireServer(plr);wait(0.001) end
+						HRP.Anchored = false
+					end
+				end
+			end)
+		else
+			AntiGrab_Function:Disconnect()
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Fire",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			AntiFire_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local chr = plr.Character
+				local HRP = chr:WaitForChild("HumanoidRootPart")
+				if chr:WaitForChild("Humanoid"):WaitForChild("FireDebounce").Value == true then
+					local Part = workspace.Map.Hole.PoisonBigHole.ExtinguishPart
+					Part.Size = Vector3.new(5,5,5)
+					Part.CastShadow = false
+					Part.Transparency = 1
+					if Part:FindFirstChild("Tex") then
+						Part:FindFirstChild("Tex"):Destroy()
+					end
+					if HRP ~= nil then
+						Part.Position = HRP.Position+Vector3.new(0,20,0)
+						wait(0.05)
+						Part.Position = HRP.Position
+					end
+				end
+			end)
+		else
+			AntiFire_Function:Disconnect()
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Explosion V1",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			plr:WaitForChild("PlayerScripts"):WaitForChild("ClientExoplosionHandler").Enabled = false
+		else
+			plr:WaitForChild("PlayerScripts"):WaitForChild("ClientExoplosionHandler").Enabled = true
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Explosion V2",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			AntiExplosionV2_Function = workspace.ChildAdded:Connect(function(model)
+				local chr = plr.Character
+				local hrp = chr:WaitForChild("HumanoidRootPart")
+				local hum = chr:WaitForChild("Humanoid")
+				if model.Name == "Part" and chr ~= nil then
+					local mag = (model.Position - hrp.Position).Magnitude
+					if mag <= 20 then
+						hrp.Anchored = true
+						wait(0.01)
+						while chr["Right Arm"].RagdollLimbPart.CanCollide == true do wait(0.001) end
+						hrp.Anchored = false
+					end
+				end
+			end)
+		else
+			AntiExplosionV2_Function:Disconnect()
+		end
+	end    
+})
+local AntiSticky = ImmunityTab:AddToggle({
+	Name = "Anti-Sticky",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			local chr = plr.Character
+			local HRP = chr:WaitForChild("HumanoidRootPart")
+			AntiSticky_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local chr = plr.Character
+				local HRP = chr:WaitForChild("HumanoidRootPart")
+				if SpawnedInToys:FindFirstChild("SprayCanWD") == nil then
+					SpawnToyRemoteFunction:InvokeServer("SprayCanWD",CFrame.new(HRP.Position+Vector3.new(0,10,0)),Vector3.new(0,0,0))
+					local SprayCanWD = SpawnedInToys:WaitForChild("SprayCanWD")
+					local BP = Instance.new("BodyPosition")
+					local Original = HRP.CFrame
+					HRP.CFrame = SprayCanWD.PrimaryPart.CFrame
+					wait(0.05)
+					SetNetworkOwner:FireServer(SprayCanWD:FindFirstChild("Straw"),SprayCanWD:FindFirstChild("Straw").CFrame)
+					wait(0.05)
+					HRP.CFrame = SprayCanWD.PrimaryPart.CFrame
+					wait(0.05)
+					SetNetworkOwner:FireServer(SprayCanWD:FindFirstChild("Straw"),SprayCanWD:FindFirstChild("Straw").CFrame)
+					BP.Position = Vector3.new(0,500,0)
+					BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+					BP.Parent = SprayCanWD.PrimaryPart
+					wait(0.05)
+					HRP.AssemblyLinearVelocity = Vector3.zero
+					HRP.CFrame = Original
+					return
+				else
+					local SprayCanWD = SpawnedInToys:FindFirstChild("SprayCanWD")
+
+					SprayCanWD:FindFirstChild("StickyRemoverPart").Size = Vector3.new(5,5,5)
+					SprayCanWD:FindFirstChild("StickyRemoverPart").Position = HRP.Position
+				end
+			end)
+		else
+			AntiSticky_Function:Disconnect()
+			AntiSticky_Function = nil
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Kick",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			local chr = plr.Character
+			local HRP = chr:WaitForChild("HumanoidRootPart")
+			AntiKick_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local chr = plr.Character
+				local HRP = chr:WaitForChild("HumanoidRootPart")
+				if SpawnedInToys:FindFirstChild("NinjaShuriken") == nil then
+					SpawnToyRemoteFunction:InvokeServer("NinjaShuriken",CFrame.new(Vector3.new(0,0,0)),Vector3.new(0,0,0))
+
+					local NinjaShuriken = SpawnedInToys:WaitForChild("NinjaShuriken")
+					game.ReplicatedStorage.PlayerEvents.StickyPartEvent:FireServer(NinjaShuriken.StickyPart,plr.Character.Torso,CFrame.new(Vector3.new(0,-10,0)))
+					return
+				else
+					local NinjaShuriken = SpawnedInToys:WaitForChild("NinjaShuriken")
+					if NinjaShuriken.StickyPart.StickyWeld.Part1 == nil then
+						game.ReplicatedStorage.PlayerEvents.StickyPartEvent:FireServer(NinjaShuriken.StickyPart,plr.Character.Torso,CFrame.new(Vector3.new(0,-10,0)))
+					end
+				end
+			end)
+		else
+			AntiKick_Function:Disconnect()
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Lag",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = false
+		else
+			plr:WaitForChild("PlayerScripts"):WaitForChild("CharacterAndBeamMove").Enabled = true
+		end
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Void",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			workspace.FallenPartsDestroyHeight = -math.huge
+		else
+			workspace.FallenPartsDestroyHeight = -100
+		end
+	end    
+})
+
+ImmunityTab:AddSection({Name = "Invincibility Others"})
+
+ImmunityTab:AddParagraph("This allows you to give other players abilities","Note: You must be in game for it to work")
+
+local ImmunityTarget_DropDown = ImmunityTab:AddDropdown({
+	Name = "Target",
+	Default = "...",
+	Options = GetPlayerList(false,true),
+	Callback = function(Value)
+		if GetPlayerFromDisplayName(Value) == nil then
+			return
+		end
+		ImmunityTarget_Value = GetPlayerFromDisplayName(Value).Name
+	end    
+})
+ImmunityTab:AddToggle({
+	Name = "Anti-Grab",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			OtherAntiGrab_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				if game.Players:FindFirstChild(ImmunityTarget_Value) and game.Players:FindFirstChild(ImmunityTarget_Value).Character then
+					local Character = game.Players:FindFirstChild(ImmunityTarget_Value).Character
+					local HRP = plr.Character.HumanoidRootPart
+					for _, PartOwner in ipairs(Character:GetDescendants()) do
+						if PartOwner:IsA("StringValue") and PartOwner.Name == "PartOwner" and PartOwner.Value ~= plr.Name then
+							local Original = HRP.CFrame
+							local Original2 = Character.Torso.CFrame
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = CFrame.new(Character.Torso.Position+Vector3.new(0,10,0))
+							wait(0.05)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = CFrame.new(Character.Torso.Position+Vector3.new(0,10,0))
+							wait(0.05)
+							SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+							wait(0.05)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = CFrame.new(Character.Torso.Position+Vector3.new(0,10,0))
+							wait(0.05)
+							SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+							wait(0.05)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = CFrame.new(Character.Torso.Position+Vector3.new(0,10,0))
+							wait(0.05)
+							SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+							Character.Torso.CFrame = Original2
+							Character.Torso.AssemblyLinearVelocity = Vector3.zero
+							DestroyGrabline:FireServer(Character.Torso)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = Original
+						end
+					end
+				end
+			end)
+		else
+			OtherAntiGrab_Function:Disconnect()
+		end
+	end    
+})
+
+CombatTab:AddToggle({
+	Name = "Throw Power",
+	Default = false,
+	Callback = function(Value)
+		ThrowPower_Toggle = Value
+	end    
+})
+CombatTab:AddSlider({
+	Name = "Power",
+	Min = 0,
+	Max = 9999,
+	Default = 60,
+	Color = Color3.fromRGB(115, 0, 255),
+	Increment = 1,
+	ValueName = "Power",
+	Callback = function(Value)
+		ThrowPower_Value = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Poison Grab",
+	Default = false,
+	Callback = function(Value)
+		PoisonGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Radiation Grab",
+	Default = false,
+	Callback = function(Value)
+		RadiationGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Fire Grab",
+	Default = false,
+	Callback = function(Value)
+		FireGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Massless Grab",
+	Default = false,
+	Callback = function(Value)
+		MasslessGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Noclip Grab",
+	Default = false,
+	Callback = function(Value)
+		NoclipGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Destroy Grab",
+	Default = false,
+	Callback = function(Value)
+		DestroyGrab_Toggle = Value
+	end    
+})
+CombatTab:AddToggle({
+	Name = "Kill Grab",
+	Default = false,
+	Callback = function(Value)
+		KillGrab_Toggle = Value
+	end    
+})
+
+MiskTab:AddSection({Name = "Annoy Players"})
+MiskTab:AddToggle({
+	Name = "Fire All",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			FireAll_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local chr = plr.Character
+				local HRP = chr:WaitForChild("HumanoidRootPart")
+				if SpawnedInToys:FindFirstChild("Campfire") then
+					local Campfire = SpawnedInToys:FindFirstChild("Campfire")
+					if Campfire.PrimaryPart:FindFirstChild("BodyPosition") == nil then
+						local BP = Instance.new("BodyPosition")
+						BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+						BP.Position = Vector3.new(0,250,0)
+						BP.Parent = Campfire.PrimaryPart
+						BP.P = 99999
+					end
+					if Campfire:FindFirstChild("SoundPart"):FindFirstChild("PartOwner") == nil then
+						local Original = HRP.CFrame
+						SetNetworkOwner:FireServer(Campfire:FindFirstChild("SoundPart"),Campfire:FindFirstChild("SoundPart").CFrame)
+						HRP.CFrame = Campfire:FindFirstChild("SoundPart").CFrame
+						wait(0.05)
+						HRP.CFrame = Original
+					end
+					Campfire:FindFirstChild("FirePlayerPart").Size = Vector3.new(99999,99999,99999)
+				else
+					SpawnToyRemoteFunction:InvokeServer("Campfire",HRP.CFrame,Vector3.new(0,0,0))
+				end
+			end)
+		else
+			if SpawnedInToys:FindFirstChild("Campfire") then
+				local Campfire = SpawnedInToys:FindFirstChild("Campfire")
+				Campfire:FindFirstChild("FirePlayerPart").Size = Vector3.new(2, 2, 2)
+				Campfire:FindFirstChild("FirePlayerPart").Anchored = false
+			end
+			FireAll_Function:Disconnect()
+		end
+	end    
+})
+MiskTab:AddToggle({
+	Name = "Kill All",
+	Default = false,
+	Callback = function(Value)
+		KillAll_Toggle = Value
+		wait(0.05)
+		if Value == true then
+			KillAll()
+		end
+	end    
+})
+MiskTab:AddToggle({
+	Name = "Radiation All",
+	Default = false,
+	Callback = function(Value)
+		RadiationAll_Toggle = Value
+		wait(0.05)
+		if Value == true then
+			RadiationAll()
+		end
+	end    
+})
+
+LineTab:AddToggle({
+	Name = "Invisible Line",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			InvisibleLine_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				game.ReplicatedStorage.GrabEvents.CreateGrabLine:FireServer(workspace,CFrame.new(Vector3.new(0,0,0)))
+			end)
+		else
+			InvisibleLine_Function:Disconnect()
+		end
+	end    
+})
+LineTab:AddToggle({
+	Name = "Crazy Line",
+	Default = false,
+	Callback = function(Value)
+		CrazyLine_Toggle = Value
+		if Value == true then
+			CrazyLine()
+		end
+	end    
+})
+LineTab:AddToggle({
+	Name = "Rainbow Line",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			RainbowLine_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				game.ReplicatedStorage.DataEvents.UpdateLineColorsEvent:FireServer(ColorSequence.new(Color3.new(math.random(0,1), math.random(0,1), math.random(0,1))),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.new(math.random(0,1),math.random(0,1),math.random(0,1)))
+			end)
+		else
+			RainbowLine_Function:Disconnect()
+		end
+	end    
+})
+
+BlobmanTab:AddSection({Name = "Single Target"})
+
+local BlobmanTarget_DropDown = BlobmanTab:AddDropdown({
+	Name = "Target",
+	Default = "...",
+	Options = GetPlayerList(false,true),
+	Callback = function(Value)
+		if GetPlayerFromDisplayName(Value) == nil then
+			return
+		end
+		BlobmanTarget_Value = GetPlayerFromDisplayName(Value).Name
+	end    
+})
+BlobmanTab:AddButton({
+	Name = "Grab",
+	Callback = function()
+		if game.Players:FindFirstChild(BlobmanTarget_Value) then
+			if GetBlob() ~= nil then
+				BlobGrab(GetBlob(),game.Players:FindFirstChild(BlobmanTarget_Value).Character.HumanoidRootPart,"Left")
+			end
+		end
+	end    
+})
+BlobmanTab:AddButton({
+	Name = "Kick",
+	Callback = function()
+		if game.Players:FindFirstChild(BlobmanTarget_Value) then
+			if GetBlob() ~= nil then
+				local Character = game.Players:FindFirstChild(BlobmanTarget_Value).Character
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobDrop(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobDrop(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.1)
+				local BF = Instance.new("BodyForce")
+				BF.Force = Vector3.new(0,50,0)
+				BF.Force = Vector3.new(9999,9999,9999)
+				BF.Parent = Character.HumanoidRootPart
+				wait(0.5)
+				DestroyGrabline:FireServer(Character.Torso)
+				wait(0.05)
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				BF:Destroy()
+			end
+		end
+	end    
+})
+BlobmanTab:AddButton({
+	Name = "Silent Kick",
+	Callback = function()
+		if game.Players:FindFirstChild(BlobmanTarget_Value) then
+			if GetBlob() ~= nil and GetBlob():IsDescendantOf(SpawnedInToys) == true then
+				local Character = game.Players:FindFirstChild(BlobmanTarget_Value).Character
+				local Original = plr.Character.HumanoidRootPart.CFrame
+				GetBlob().PrimaryPart.CFrame = CFrame.new(Vector3.new(0,80,0)+Character.HumanoidRootPart.Position)
+				wait(0.05)
+				GetBlob().PrimaryPart.CFrame = CFrame.new(Vector3.new(0,80,0)+Character.HumanoidRootPart.Position)
+				wait(0.05)
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobDrop(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.05)
+				DestroyToy:FireServer(GetBlob())
+				wait(0.1)
+				plr.Character.HumanoidRootPart.CFrame = Original
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.01)
+				plr.Character.HumanoidRootPart.CFrame = Original
+			end
+		end
+	end    
+})
+BlobmanTab:AddButton({
+	Name = "Bring",
+	Callback = function()
+		if game.Players:FindFirstChild(BlobmanTarget_Value) then
+			if GetBlob() ~= nil then
+				local Character = game.Players:FindFirstChild(BlobmanTarget_Value).Character
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobDrop(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobGrab(GetBlob(),Character.HumanoidRootPart,"Left")
+				wait(0.1)
+				BlobDrop(GetBlob(),Character.HumanoidRootPart,"Left")
+			end
+		end
+	end    
+})
+
+ExplodeTab:AddSection({Name = "Drawer Cannon"})
+
+ExplodeTab:AddToggle({
+	Name = "Enabled",
+	Default = false,
+	Callback = function(Value)
+		DrawerCannon_Toggle = Value
+		if Value == true then
+			DrawerCannon()
+		end
+	end    
+})
+
+ExplodeTab:AddToggle({
+	Name = "Auto Load",
+	Default = false,
+	Callback = function(Value)
+		DrawerCannonAutoLoad_Toggle = Value
+	end    
+})
+ExplodeTab:AddToggle({
+	Name = "Auto Shoot",
+	Default = false,
+	Callback = function(Value)
+		DrawerCannonAutoShoot_Toggle = Value
+	end    
+})
+ExplodeTab:AddSlider({
+	Name = "Drawers",
+	Min = 1,
+	Max = 20,
+	Default = 1,
+	Color = Color3.fromRGB(255, 179, 85),
+	Increment = 1,
+	ValueName = "Items",
+	Callback = function(Value)
+		DrawerCannon_Value = Value
+	end    
+})
+
+
+local LoopTarget_DropDown = LoopTab:AddDropdown({
+	Name = "Target",
+	Default = "...",
+	Options = GetPlayerList(false,true),
+	Callback = function(Value)
+		if GetPlayerFromDisplayName(Value) == nil then
+			return
+		end
+		LoopTarget_Value = GetPlayerFromDisplayName(Value).Name
+	end    
+})
+LoopTab:AddToggle({
+	Name = "Loop Kill",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			if game.Players:FindFirstChild(LoopTarget_Value) == nil then
+				return
+			end
+			LoopKill_Function = game.Players:FindFirstChild(LoopTarget_Value).CharacterAdded:Connect(function()
+				wait(0.05)
+				if game.Players:FindFirstChild(LoopTarget_Value).Character and game.Players:FindFirstChild(LoopTarget_Value).Character:FindFirstChild("HumanoidRootPart") then
+					local Character = game.Players:FindFirstChild(LoopTarget_Value).Character
+					local Original = plr.Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					wait(0.05)
+					SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+					wait(0.05)
+					Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+					wait(0.1)
+					Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+					wait(0.05)
+					DestroyGrabline:FireServer(Character.Torso)
+					wait(0.05)
+					Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0,-9999,0)
+					plr.Character.HumanoidRootPart.CFrame = Original
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+					wait(0.05)
+					plr.Character.HumanoidRootPart.CFrame = Original
+					plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				end
+			end)
+			if game.Players:FindFirstChild(LoopTarget_Value).Character and game.Players:FindFirstChild(LoopTarget_Value).Character:FindFirstChild("HumanoidRootPart") then
+				local Character = game.Players:FindFirstChild(LoopTarget_Value).Character
+				local Original = plr.Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				SetNetworkOwner:FireServer(Character.Torso,Character.Torso.CFrame)
+				wait(0.05)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+				wait(0.1)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+				wait(0.05)
+				DestroyGrabline:FireServer(Character.Torso)
+				wait(0.05)
+				Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0,-9999,0)
+				plr.Character.HumanoidRootPart.CFrame = Original
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+				wait(0.05)
+				plr.Character.HumanoidRootPart.CFrame = Original
+				plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+			end
+		else
+			LoopKill_Function:Disconnect()
+		end
+	end    
+})
+
+local RemainingTime = AutoTab:AddParagraph("Remaining Time: "..workspace.Slots:FindFirstChild("Slots").Screen.SlotGui.TimeLeftFrame.TimeText.Text,"")
+AutoTab:AddToggle({
+	Name = "Auto Farm",
+	Default = false,
+	Callback = function(Value)
+		if Value == true then
+			AutoFarm_Function = game:GetService("RunService").RenderStepped:Connect(function()
+				local Original = plr.Character.HumanoidRootPart.CFrame
+				if workspace.Slots:FindFirstChild("Slots").SlotHandle.LightBall.Material == Enum.Material.Neon then
+					for _, LightBall in ipairs(workspace.Slots:GetDescendants()) do
+						if LightBall:IsA("MeshPart") and LightBall.Name == "LightBall" then
+							plr.Character.HumanoidRootPart.CFrame = CFrame.new(LightBall.Position + Vector3.new(0,5,0))
+							plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+							wait(0.05)
+							SetNetworkOwner:FireServer(LightBall.Parent.Handle,LightBall.CFrame)
+							wait(0.05)
+							plr.Character.HumanoidRootPart.CFrame = CFrame.new(LightBall.Position + Vector3.new(0,5,0))
+							plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+							wait(0.05)
+							SetNetworkOwner:FireServer(LightBall.Parent.Handle,LightBall.CFrame)
+							wait(0.05)
+							plr.Character.HumanoidRootPart.CFrame = CFrame.new(LightBall.Position + Vector3.new(0,5,0))
+							plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+							wait(0.05)
+							SetNetworkOwner:FireServer(LightBall.Parent.Handle,LightBall.CFrame)
+							wait(0.1)
+							plr.Character.HumanoidRootPart.CFrame = CFrame
+							plr.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
+						end
+					end
+				end
+			end)
+		else
+			AutoFarm_Function:Disconnect()
+		end
+	end    
+})
+
+ConfigurationTab:AddSection({Name = "Toy Selection"})
+
+ConfigurationTab:AddDropdown({
+	Name = "Fire Toy",
+	Default = "...",
+	Options = {"Campfire","OvenMicrowaveWhite","BathroomSink","CounterSink","OvenRusty","OvenDarkGray"},
+	Callback = function(Value)
+		FirePartToy = Value
+	end    
+})
+ConfigurationTab:AddDropdown({
+	Name = "Radiation Toy",
+	Default = "...",
+	Options = {"OvenMicrowaveWhite","UFO"},
+	Callback = function(Value)
+		RadiationPartToy = Value
+	end    
+})
+
+CreditsTab:AddParagraph("@Royal_No0bs (Royal Noob)","Scripted Everything")
+CreditsTab:AddParagraph("@Arodriguezus4 (Blocky)","Generated Ideas")
+
+workspace.Slots:FindFirstChild("Slots").Screen.SlotGui.TimeLeftFrame.TimeText.Changed:Connect(function()
+	RemainingTime:Set("Remaining Time: "..workspace.Slots:FindFirstChild("Slots").Screen.SlotGui.TimeLeftFrame.TimeText.Text,"")
+end)
+
+workspace.ChildAdded:Connect(function(GrabParts)
+	if GrabParts:IsA("Model") and GrabParts.Name == "GrabParts" then
+		local Part = GrabParts:WaitForChild("GrabPart"):WaitForChild("WeldConstraint").Part1
+		task.spawn(function()
+			if PoisonGrab_Toggle == true then
+				if Part.Parent:FindFirstChild("Humanoid") then
+					local PoisonPart = workspace.Map.Hole.PoisonBigHole.PoisonHurtPart
+					while GrabParts:IsDescendantOf(workspace) do
+						PoisonPart.Size = Vector3.new(1,1,1)
+						PoisonPart.Position = Part.Parent:FindFirstChild("Head").Position
+						wait()
+					end
+					PoisonPart.Size = Vector3.new(16.5, 7.625, 17.5)
+					PoisonPart.Position = Vector3.new(124.325, 347.506, 309.705)
+				end
+			end
+		end)
+		task.spawn(function()
+			if RadiationGrab_Toggle == true then
+				if Part.Parent:FindFirstChild("Humanoid") then
+					local RadiationPart = workspace.Map.AlwaysHereTweenedObjects.InnerUFO.Object.ObjectModel:FindFirstChild("PaintPlayerPart")
+					while GrabParts:IsDescendantOf(workspace) do
+						RadiationPart.Size = Vector3.new(1,1,1)
+						RadiationPart.Position = Part.Parent:FindFirstChild("Head").Position
+						wait()
+					end
+					RadiationPart.Size = Vector3.new(0,0,0)
+					RadiationPart.Position = Vector3.new(0,0,0)
+				end
+			end
+		end)
+		task.spawn(function()
+			if FireGrab_Toggle == true then
+				while GrabParts:IsDescendantOf(workspace) do
+					local chr = plr.Character
+					local HRP = chr:WaitForChild("HumanoidRootPart")
+					if SpawnedInToys:FindFirstChild("Campfire") then
+						local Campfire = SpawnedInToys:FindFirstChild("Campfire")
+						if Campfire.PrimaryPart:FindFirstChild("BodyPosition") == nil then
+							local BP = Instance.new("BodyPosition")
+							BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+							BP.Position = Vector3.new(0,250,0)
+							BP.Parent = Campfire.PrimaryPart
+							BP.P = 99999
+						end
+						if Campfire:FindFirstChild("SoundPart"):FindFirstChild("PartOwner") == nil then
+							local Original = HRP.CFrame
+							SetNetworkOwner:FireServer(Campfire:FindFirstChild("SoundPart"),Campfire:FindFirstChild("SoundPart").CFrame)
+							HRP.CFrame = CFrame.new(Campfire:FindFirstChild("SoundPart").Position+Vector3.new(0,10,0))
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							wait(0.05)
+							SetNetworkOwner:FireServer(Campfire:FindFirstChild("SoundPart"),Campfire:FindFirstChild("SoundPart").CFrame)
+							HRP.CFrame = CFrame.new(Campfire:FindFirstChild("SoundPart").Position+Vector3.new(0,10,0))
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							wait(0.05)
+							SetNetworkOwner:FireServer(Campfire:FindFirstChild("SoundPart"),Campfire:FindFirstChild("SoundPart").CFrame)
+							HRP.CFrame = CFrame.new(Campfire:FindFirstChild("SoundPart").Position+Vector3.new(0,10,0))
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							wait(0.1)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = Original
+							wait(0.05)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = Original
+							wait(0.05)
+							HRP.AssemblyLinearVelocity = Vector3.zero
+							HRP.CFrame = Original
+						end
+						Campfire:FindFirstChild("FirePlayerPart").Size = Vector3.new(3,3,3)
+						Campfire:FindFirstChild("FirePlayerPart").Position = Part.Parent:FindFirstChild("Head").Position
+					else
+						SpawnToyRemoteFunction:InvokeServer("Campfire",HRP.CFrame,Vector3.new(0,0,0))
+					end
+					wait()
+				end
+			end
+		end)
+		task.spawn(function()
+			if MasslessGrab_Toggle == true and Part.Anchored == false then
+				while GrabParts:IsDescendantOf(workspace) do
+					local chr = plr.Character
+					local HRP = chr:WaitForChild("HumanoidRootPart")
+					if Part.Parent then
+						for _, p in ipairs(Part.Parent:GetChildren()) do
+							if p:IsA("BasePart") then
+								p.Massless = true
+							end
+						end
+					else
+						Part.Massless = true
+					end
+					wait()
+				end
+				if Part.Parent then
+					for _, p in ipairs(Part.Parent:GetChildren()) do
+						if p:IsA("BasePart") then
+							p.Massless = false
+						end
+					end
+				else
+					Part.Massless = false
+				end
+			end
+		end)
+		task.spawn(function()
+			if NoclipGrab_Toggle == true and Part.Anchored == false then
+				while GrabParts:IsDescendantOf(workspace) do
+					local chr = plr.Character
+					local HRP = chr:WaitForChild("HumanoidRootPart")
+					if Part.Parent then
+						for _, p in ipairs(Part.Parent:GetDescendants()) do
+							if p:IsA("BasePart") then
+								p.CanCollide = false
+							end
+						end
+					else
+						Part.CanCollide = false
+					end
+					wait()
+				end
+				if Part.Parent then
+					for _, p in ipairs(Part.Parent:GetDescendants()) do
+						if p:IsA("BasePart") and p.Transparency ~= 1 then
+							p.CanCollide = true
+						end
+					end
+				else
+					Part.CanCollide = true
+				end
+			end
+		end)
+		task.spawn(function()
+			if DestroyGrab_Toggle == true and Part.Anchored == false then
+				while GrabParts:IsDescendantOf(workspace) do
+					local chr = plr.Character
+					local HRP = chr:WaitForChild("HumanoidRootPart")
+					for _, p in ipairs(Part.Parent:GetDescendants()) do
+						if p:IsA("BasePart") then
+							p.CanCollide = false
+						end
+					end
+					Part.AssemblyLinearVelocity = Vector3.new(0,999999,0)
+					wait()
+				end
+				for _, p in ipairs(Part.Parent:GetDescendants()) do
+					if p:IsA("BasePart") and p.Transparency ~= 1 then
+						p.CanCollide = true
+					end
+				end
+				Part.AssemblyLinearVelocity = Vector3.zero
+			end
+		end)
+		task.spawn(function()
+			if KillGrab_Toggle == true and Part.Anchored == false and Part.Parent:FindFirstChild("Humanoid") then
+				wait(0.2)
+				Part.AssemblyLinearVelocity = Vector3.new(99999,0,0)
+				wait(0.1)
+				DestroyGrabline:FireServer(Part)
+				wait(0.05)
+				Part.AssemblyLinearVelocity = Vector3.new(0,-9999,0)
+			end
+		end)
+		local i = false
+		wait(0.02)
+		UIS.InputBegan:Connect(function(Input)
+			if Input.UserInputType == Enum.UserInputType.MouseButton2 and ThrowPower_Toggle == true and i == false then
+				ThrowPart(Part)
+				i = true
+			end
+			if Input.UserInputType == Enum.UserInputType.MouseButton1 and i == false then
+				wait(0.05)
+				i = true
+			end
+		end)
+	end
+end)
+
+game.Players.PlayerAdded:Connect(function(plr)
+	BlobmanTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+	LoopTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+	ImmunityTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+end)
+game.Players.PlayerRemoving:Connect(function(plr)
+	BlobmanTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+	LoopTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+	ImmunityTarget_DropDown:Refresh(GetPlayerList(false,true),true)
+end)
+plr.Character.Humanoid.Changed:Connect(function()
+	if WalkSpeed_Toggle == true then
+		plr.Character.Humanoid.WalkSpeed = WalkSpeed_Value
+	end
+end)
+
+plr.CharacterAdded:Connect(function(chr)
+	chr:WaitForChild("Humanoid").Changed:Connect(function()
+		if WalkSpeed_Toggle == true then
+			chr.Humanoid.WalkSpeed = WalkSpeed_Value
+		end
+	end)
+end)
+
+local Held = false
+UIS.InputBegan:Connect(function(input,gp)
+	if gp then
+		return
+	end
+	if input.KeyCode == Enum.KeyCode.Space and InfiniteJump_Toggle == true and plr.Character then
+		Held = true
+		while Held == true do
+			plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			wait(0.01)
+		end
+	end
+end)
+
+UIS.InputEnded:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Space then
+		Held = false
+	end
+end)
+
+
+OrionLib:Init()
+
