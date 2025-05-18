@@ -961,6 +961,91 @@ function OrionLib:MakeWindow(WindowValues)
 
 			return ParagraphFunctions
 		end
+		function TabFunctions:AddTextbox(TextboxInfo)
+			local TextboxFunctions = {}
+
+			local Textbox = Instance.new("Frame")
+			local Textbox_UICorner = Instance.new("UICorner")
+			local Textbox_UIStroke = Instance.new("UIStroke")
+			local Title = Instance.new("TextLabel")
+			local InputFrame = Instance.new("Frame")
+			local InputFrame_UICorner = Instance.new("UICorner")
+			local Input = Instance.new("TextBox")
+			local InputFrame_UIStroke = Instance.new("UIStroke")
+
+			Textbox.Parent = ItemContainer
+			Textbox.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+			Textbox.BorderSizePixel = 0
+			Textbox.Size = UDim2.new(1, 0, 0, 38)
+
+			Textbox_UICorner.CornerRadius = UDim.new(0, 5)
+			Textbox_UICorner.Parent = Textbox
+
+			Textbox_UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			Textbox_UIStroke.Thickness = 1
+			Textbox_UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			Textbox_UIStroke.Parent = Textbox
+
+			Title.Name = "Content"
+			Title.Parent = Textbox
+			Title.BackgroundTransparency = 1.000
+			Title.Position = UDim2.new(0, 12, 0, 0)
+			Title.Size = UDim2.new(0, -12, 1, 0)
+			Title.Font = Enum.Font.GothamBold
+			Title.Text = TextboxInfo.Name
+			Title.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Title.TextSize = 15.000
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+			Title.AutomaticSize = Enum.AutomaticSize.X
+
+			InputFrame.Parent = Textbox
+			InputFrame.AnchorPoint = Vector2.new(1, 0.5)
+			InputFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			InputFrame.BorderSizePixel = 0
+			InputFrame.Position = UDim2.new(1, -12, 0.5, 0)
+			InputFrame.Size = UDim2.new(0, 49, 0, 24)
+			InputFrame.ClipsDescendants = true
+
+			InputFrame_UICorner.CornerRadius = UDim.new(0, 4)
+			InputFrame_UICorner.Parent = InputFrame
+
+			InputFrame_UIStroke.Color = Color3.fromRGB(60, 60, 60)
+			InputFrame_UIStroke.Thickness = 1
+			InputFrame_UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+			InputFrame_UIStroke.Parent = InputFrame
+
+			Input.Parent = InputFrame
+			Input.BackgroundTransparency = 1.000
+			Input.Size = UDim2.new(0, 0, 1, 0)
+			Input.ClearTextOnFocus = false
+			Input.Font = Enum.Font.GothamMedium
+			Input.PlaceholderColor3 = Color3.fromRGB(210, 210, 210)
+			Input.PlaceholderText = "Input"
+			Input.Text = TextboxInfo.Default
+			Input.TextColor3 = Color3.fromRGB(240, 240, 240)
+			Input.TextSize = 14.000
+			Input.AutomaticSize = Enum.AutomaticSize.X
+			Input.TextXAlignment = Enum.TextXAlignment.Right
+			Input.Position = UDim2.new(0.5,0,0.5,0)
+			Input.AnchorPoint = Vector2.new(0.5,0.5)
+
+			Input.Changed:Connect(function()
+				TextboxInfo.Callback(Input.Text)
+				if Input.AbsoluteSize.X+10 < 400 - Title.AbsoluteSize.X then
+					local Info = TweenInfo.new(
+						0.1,
+						Enum.EasingStyle.Linear,
+						Enum.EasingDirection.Out,
+						0,
+						false,
+						0
+					)
+					TweenService:Create(InputFrame,Info,{Size = UDim2.new(0, Input.AbsoluteSize.X+10, 0, 24)}):Play()
+				end
+			end)
+
+			return TextboxFunctions
+		end
 		function TabFunctions:SetTab()
 			for _, Tab in ipairs(Orion:GetChildren()) do
 				if Tab:IsA("ScrollingFrame") then
@@ -1613,8 +1698,19 @@ function CrazyLine()
 		wait()
 	end
 end
-
-local Key = "Kiqu0"
+function GetMobileButton(Name)
+	if Name == "Throw" then
+		if plr.PlayerGui:FindFirstChild("ContextActionGui") then
+			for _, ContextActionButton in ipairs(plr.PlayerGui:FindFirstChild("ContextActionGui"):FindFirstChild("ContextButtonFrame"):GetDescendants()) do
+				if ContextActionButton.ActionIcon.Image == "http://www.roblox.com/asset/?id=9603678090" then
+					return ContextActionButton
+				end
+			end
+		end
+	end
+	return nil
+end
+--[[local Key = "Kiqu0"
 local KeyInput = ""
 local CorrectKey = false
 local KeyWindow = OrionLib:MakeWindow({Name = "Key Window", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
@@ -1625,24 +1721,25 @@ local KeyTab = KeyWindow:MakeTab({
 	PremiumOnly = false
 })
 KeyTab:AddTextbox({
-	Name = "Textbox",
-	Default = "default box input",
+	Name = "Key",
+	Default = "...",
 	TextDisappear = true,
 	Callback = function(Value)
-		print(Value)
+		KeyInput = Value
 	end	  
 })
 KeyTab:AddButton({
 	Name = "Enter",
 	Callback = function()
 		if KeyInput == Key then
-			
+			CorrectKey = true
 		end
 	end    
 })
 while CorrectKey == false do
-	wait()
-end
+	print("Wating For Key")
+	wait(0.1)
+end]]
 --BOOT UP LIBRARY --
 
 local Window = OrionLib:MakeWindow({Name = "Abyss V3", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
@@ -2723,15 +2820,15 @@ workspace.ChildAdded:Connect(function(GrabParts)
 				i = true
 			end
 		end)
-		if plr.PlayerGui:FindFirstChild("ContextActionGui") and plr.PlayerGui.ContextActionGui:FindFirstChild("Throw") then
-			plr.PlayerGui.ControlsGui.MobileFrame:FindFirstChild("Throw").MouseButton1Click:Connect(function()
+		if GetMobileButton("Throw") ~= nil then
+			GetMobileButton("Throw").MouseButton1Click:Connect(function()
 				if ThrowPower_Toggle == true and i == false then
 					ThrowPart(Part)
 					i = true
 				end
 			end)
 		end
-		
+
 	end
 end)
 
