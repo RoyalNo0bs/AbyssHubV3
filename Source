@@ -1613,6 +1613,36 @@ function CrazyLine()
 		wait()
 	end
 end
+
+local Key = "Kiqu0"
+local KeyInput = ""
+local CorrectKey = false
+local KeyWindow = OrionLib:MakeWindow({Name = "Key Window", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local KeyTab = KeyWindow:MakeTab({
+	Name = "Key",
+	Icon = "",
+	PremiumOnly = false
+})
+KeyTab:AddTextbox({
+	Name = "Textbox",
+	Default = "default box input",
+	TextDisappear = true,
+	Callback = function(Value)
+		print(Value)
+	end	  
+})
+KeyTab:AddButton({
+	Name = "Enter",
+	Callback = function()
+		if KeyInput == Key then
+			
+		end
+	end    
+})
+while CorrectKey == false do
+	wait()
+end
 --BOOT UP LIBRARY --
 
 local Window = OrionLib:MakeWindow({Name = "Abyss V3", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
@@ -2693,7 +2723,7 @@ workspace.ChildAdded:Connect(function(GrabParts)
 				i = true
 			end
 		end)
-		if plr.PlayerGui.ControlsGui.MobileFrame:FindFirstChild("Throw") then
+		if plr.PlayerGui:FindFirstChild("ContextActionGui") and plr.PlayerGui.ContextActionGui:FindFirstChild("Throw") then
 			plr.PlayerGui.ControlsGui.MobileFrame:FindFirstChild("Throw").MouseButton1Click:Connect(function()
 				if ThrowPower_Toggle == true and i == false then
 					ThrowPart(Part)
