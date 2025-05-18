@@ -2343,7 +2343,20 @@ LineTab:AddToggle({
 	Callback = function(Value)
 		if Value == true then
 			RainbowLine_Function = game:GetService("RunService").RenderStepped:Connect(function()
-				game.ReplicatedStorage.DataEvents.UpdateLineColorsEvent:FireServer(ColorSequence.new(Color3.new(math.random(0,1), math.random(0,1), math.random(0,1))),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 0, 0),Color3.new(math.random(0,1),math.random(0,1),math.random(0,1)))
+				local function GenerateLineBeam(C1,C2,C3,C4,C5,C6,C7,C8,C9)
+					local Beam = {}
+					table.insert(Beam,ColorSequenceKeypoint.new(0,C1))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.125,C2))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.25,C3))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.375,C4))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.5,C5))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.625,C6))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.75,C7))
+					table.insert(Beam,ColorSequenceKeypoint.new(0.875,C8))
+					table.insert(Beam,ColorSequenceKeypoint.new(1,C9))
+					return Beam
+				end
+				game.ReplicatedStorage.DataEvents.UpdateLineColorsEvent:FireServer(ColorSequence.new( GenerateLineBeam(Color3.fromRGB(255, 0, 0),Color3.fromRGB(255, 60, 0),Color3.fromRGB(251, 255, 0),Color3.fromRGB(34, 255, 0),Color3.fromRGB(0, 255, 191),Color3.fromRGB(0, 4, 255),Color3.fromRGB(60, 0, 255),Color3.fromRGB(183, 0, 255),Color3.fromRGB(255, 0, 208)) ),nil,nil,nil,nil,nil,nil,nil,nil,Color3.new(1, 0, 0.764706))
 			end)
 		else
 			RainbowLine_Function:Disconnect()
@@ -2864,4 +2877,3 @@ end)
 
 
 OrionLib:Init()
-
