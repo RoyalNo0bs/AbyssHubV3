@@ -1701,8 +1701,8 @@ end
 function GetMobileButton(Name)
 	if Name == "Throw" then
 		if plr.PlayerGui:FindFirstChild("ContextActionGui") then
-			for _, ContextActionButton in ipairs(plr.PlayerGui:FindFirstChild("ContextActionGui"):FindFirstChild("ContextButtonFrame"):GetDescendants()) do
-				if ContextActionButton.ActionIcon.Image == "http://www.roblox.com/asset/?id=9603678090" then
+			for _, ContextActionButton in ipairs(plr.PlayerGui:FindFirstChild("ContextActionGui"):FindFirstChild("ContextButtonFrame"):GetChildren()) do
+				if ContextActionButton:IsA("ImageButton") and  ContextActionButton.ActionIcon.Image == "http://www.roblox.com/asset/?id=9603678090" then
 					return ContextActionButton
 				end
 			end
