@@ -2513,6 +2513,7 @@ ConfigurationTab:AddDropdown({
 
 CreditsTab:AddParagraph("@Royal_No0bs (Royal Noob)","Scripted Everything")
 CreditsTab:AddParagraph("@Arodriguezus4 (Blocky)","Generated Ideas")
+CreditsTab:AddParagraph("@coolguywithvc3 (whoput themuffins)","Mobile Tester For Functions")
 
 workspace.Slots:FindFirstChild("Slots").Screen.SlotGui.TimeLeftFrame.TimeText.Changed:Connect(function()
 	RemainingTime:Set("Remaining Time: "..workspace.Slots:FindFirstChild("Slots").Screen.SlotGui.TimeLeftFrame.TimeText.Text,"")
@@ -2692,6 +2693,15 @@ workspace.ChildAdded:Connect(function(GrabParts)
 				i = true
 			end
 		end)
+		if plr.PlayerGui.ControlsGui.MobileFrame:FindFirstChild("Throw") then
+			plr.PlayerGui.ControlsGui.MobileFrame:FindFirstChild("Throw").MouseButton1Click:Connect(function()
+				if ThrowPower_Toggle == true and i == false then
+					ThrowPart(Part)
+					i = true
+				end
+			end)
+		end
+		
 	end
 end)
 
@@ -2719,23 +2729,9 @@ plr.CharacterAdded:Connect(function(chr)
 	end)
 end)
 
-local Held = false
-UIS.InputBegan:Connect(function(input,gp)
-	if gp then
-		return
-	end
-	if input.KeyCode == Enum.KeyCode.Space and InfiniteJump_Toggle == true and plr.Character then
-		Held = true
-		while Held == true do
-			plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-			wait(0.01)
-		end
-	end
-end)
-
-UIS.InputEnded:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.Space then
-		Held = false
+UIS.JumpRequest:Connect(function()
+	if InfiniteJump_Toggle == true then
+		plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 	end
 end)
 
