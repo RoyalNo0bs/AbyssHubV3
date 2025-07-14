@@ -4,6 +4,12 @@ return {
 		UserId = 2620221923;
 		DisplayName = "Dark";
 		Reason = "Scamming for assets"
+	};
+
+	ProToons_Alt = {
+		UserId = 4955233520;
+		DisplayName = "Dark";
+		Reason = "Scamming for assets"
 	}
 
 }
